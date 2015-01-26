@@ -6,7 +6,6 @@ debug.log
 /.bundle
 /.ruby-version
 /Gemfile.lock
-pkg
 /dist
 /doc/rdoc
 /*/doc
@@ -19,4 +18,4 @@ pkg
 /railties/test/initializer/root/log
 /railties/doc
 /railties/tmp
-/guides/output
+

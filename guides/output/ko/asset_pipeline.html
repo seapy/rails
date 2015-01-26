@@ -1,0 +1,909 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Asset Pipeline(The Asset Pipeline) {원문·전체} — Ruby on Rails Guides</title>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+
+<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body class="guide">
+  <div>
+    <img src="images/edge_badge.png" alt="edge-badge" id="edge-badge" />
+  </div>
+  <div id="topNav">
+    <div class="wrapper">
+      <strong class="more-info-label">More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <span class="red-button more-info-button">
+        More Ruby on Rails
+      </span>
+      <ul class="more-info-links s-hidden">
+        <li class="more-info"><a href="http://rubyonrails.org/">개요</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/download">다운로드</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/deploy">배포</a></li>
+        <li class="more-info"><a href="https://github.com/rails/rails">코드</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/screencasts">스크린캐스트</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/documentation">도큐먼트</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/ecosystem">생태계</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/community">커뮤니티</a></li>
+        <li class="more-info"><a href="http://weblog.rubyonrails.org/">블로그</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <ul class="nav">
+        <li><a class="nav-item" href="index.html">홈</a></li>
+        <li class="guides-index guides-index-large">
+          <a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu" class="guides-index-item nav-item">가이드 인덱스</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+              <dl class="L">
+                <dt>Start Here</dt>
+                <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+                <dt>Models</dt>
+                <dd><a href="active_record_basics.html">Active Record Basics</a></dd>
+                <dd><a href="active_record_migrations.html">Active Record Migrations</a></dd>
+                <dd><a href="active_record_validations.html">Active Record Validations</a></dd>
+                <dd><a href="active_record_callbacks.html">Active Record Callbacks</a></dd>
+                <dd><a href="association_basics.html">Active Record Associations</a></dd>
+                <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+                <dt>Views</dt>
+                <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+                <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+                <dt>Controllers</dt>
+                <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+                <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+              </dl>
+              <dl class="R">
+                <dt>Digging Deeper</dt>
+                <dd><a href="active_support_core_extensions.html">Active Support Core Extensions</a></dd>
+                <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+                <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+                <dd><a href="active_job_basics.html">Active Job Basics</a></dd>
+                <dd><a href="security.html">Securing Rails Applications</a></dd>
+                <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+                <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+                <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+                <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
+                <dd><a href="working_with_javascript_in_rails.html">Working with JavaScript in Rails</a></dd>
+                <dd><a href="autoloading_and_reloading_constants.html">Autoloading and Reloading Constants</a></dd>
+                <dt>Extending Rails</dt>
+                <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+                <dd><a href="generators.html">Creating and Customizing Rails Generators</a></dd>
+                <dt>Contributing to Ruby on Rails</dt>
+                <dd><a href="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</a></dd>
+                <dd><a href="api_documentation_guidelines.html">API Documentation Guidelines</a></dd>
+                <dd><a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a></dd>
+                <dt>Maintenance Policy</dt>
+                <dd><a href="maintenance_policy.html">Maintenance Policy</a></dd>
+                <dt>Release Notes</dt>
+                <dd><a href="upgrading_ruby_on_rails.html">Upgrading Ruby on Rails</a></dd>
+                <dd><a href="4_2_release_notes.html">Ruby on Rails 4.2 Release Notes</a></dd>
+                <dd><a href="4_1_release_notes.html">Ruby on Rails 4.1 Release Notes</a></dd>
+                <dd><a href="4_0_release_notes.html">Ruby on Rails 4.0 Release Notes</a></dd>
+                <dd><a href="3_2_release_notes.html">Ruby on Rails 3.2 Release Notes</a></dd>
+                <dd><a href="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</a></dd>
+                <dd><a href="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</a></dd>
+                <dd><a href="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</a></dd>
+                <dd><a href="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</a></dd>
+              </dl>
+          </div>
+        </li>
+        <li><a class="nav-item" href="contributing_to_ruby_on_rails.html">기여하기</a></li>
+        <li><a class="nav-item" href="credits.html">크레딧</a></li>
+        <li class="guides-index guides-index-small">
+          <select class="guides-index-item nav-item">
+            <option value="index.html">가이드 인덱스</option>
+              <optgroup label="Start Here">
+                  <option value="getting_started.html">Getting Started with Rails</option>
+              </optgroup>
+              <optgroup label="Models">
+                  <option value="active_record_basics.html">Active Record Basics</option>
+                  <option value="active_record_migrations.html">Active Record Migrations</option>
+                  <option value="active_record_validations.html">Active Record Validations</option>
+                  <option value="active_record_callbacks.html">Active Record Callbacks</option>
+                  <option value="association_basics.html">Active Record Associations</option>
+                  <option value="active_record_querying.html">Active Record Query Interface</option>
+              </optgroup>
+              <optgroup label="Views">
+                  <option value="layouts_and_rendering.html">Layouts and Rendering in Rails</option>
+                  <option value="form_helpers.html">Action View Form Helpers</option>
+              </optgroup>
+              <optgroup label="Controllers">
+                  <option value="action_controller_overview.html">Action Controller Overview</option>
+                  <option value="routing.html">Rails Routing from the Outside In</option>
+              </optgroup>
+              <optgroup label="Digging Deeper">
+                  <option value="active_support_core_extensions.html">Active Support Core Extensions</option>
+                  <option value="i18n.html">Rails Internationalization API</option>
+                  <option value="action_mailer_basics.html">Action Mailer Basics</option>
+                  <option value="active_job_basics.html">Active Job Basics</option>
+                  <option value="security.html">Securing Rails Applications</option>
+                  <option value="debugging_rails_applications.html">Debugging Rails Applications</option>
+                  <option value="configuring.html">Configuring Rails Applications</option>
+                  <option value="command_line.html">Rails Command Line Tools and Rake Tasks</option>
+                  <option value="asset_pipeline.html">Asset Pipeline</option>
+                  <option value="working_with_javascript_in_rails.html">Working with JavaScript in Rails</option>
+                  <option value="autoloading_and_reloading_constants.html">Autoloading and Reloading Constants</option>
+              </optgroup>
+              <optgroup label="Extending Rails">
+                  <option value="rails_on_rack.html">Rails on Rack</option>
+                  <option value="generators.html">Creating and Customizing Rails Generators</option>
+              </optgroup>
+              <optgroup label="Contributing to Ruby on Rails">
+                  <option value="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</option>
+                  <option value="api_documentation_guidelines.html">API Documentation Guidelines</option>
+                  <option value="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</option>
+              </optgroup>
+              <optgroup label="Maintenance Policy">
+                  <option value="maintenance_policy.html">Maintenance Policy</option>
+              </optgroup>
+              <optgroup label="Release Notes">
+                  <option value="upgrading_ruby_on_rails.html">Upgrading Ruby on Rails</option>
+                  <option value="4_2_release_notes.html">Ruby on Rails 4.2 Release Notes</option>
+                  <option value="4_1_release_notes.html">Ruby on Rails 4.1 Release Notes</option>
+                  <option value="4_0_release_notes.html">Ruby on Rails 4.0 Release Notes</option>
+                  <option value="3_2_release_notes.html">Ruby on Rails 3.2 Release Notes</option>
+                  <option value="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</option>
+                  <option value="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</option>
+                  <option value="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</option>
+                  <option value="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</option>
+              </optgroup>
+          </select>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>Asset Pipeline<span class="original-text-h">(The Asset Pipeline)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></h2><p>본 가이드에서는 asset pipeline에 대해서 다룹니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This guide covers the asset pipeline.</p><p>본 가이드를 읽은 후, 아래의 내용을 알게 될 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">After reading this guide, you will know:</p>
+<ul>
+<li><p>asset pipeline의 개념과 하는 일을 이해하는 방법 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How to understand what the asset pipeline is and what it does.</p></li>
+<li><p>어플리케이션 자원을 적절하게 구성하는 방법 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How to properly organize your application assets.</p></li>
+<li><p>appet pipeline의 잇점을 이해하는 방법 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How to understand the benefits of the asset pipeline.</p></li>
+<li><p>pipeline에 전처리기를 추가하는 방법 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How to add a pre-processor to the pipeline.</p></li>
+<li><p>웹 자원을 하나의 젬으로 포장하는 방법 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How to package assets with a gem.</p></li>
+</ul>
+
+
+                <div id="subCol">
+            <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+            <ol class="chapters">
+<li>
+<a href="#asset-pipeline%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-questionmark-what-is-the-asset-pipeline-questionmark-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">Asset Pipeline이란 무엇인가?<span class="original-text-h">(What is the Asset Pipeline?)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a>
+
+<ul>
+<li><a href="#%EC%A3%BC%EC%9A%94-%ED%8A%B9%EC%A7%95-main-features-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">주요 특징<span class="original-text-h">(Main Features)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#fingerprinting%EC%9D%98-%EC%A0%95%EC%9D%98%EC%99%80-%EC%9C%A0%EB%85%90%ED%95%B4%EC%95%BC%ED%95%A0-%EC%9D%B4%EC%9C%A0-what-is-fingerprinting-and-why-should-i-care-questionmark-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">Fingerprinting의 정의와  유념해야할 이유<span class="original-text-h">(What is Fingerprinting and Why Should I Care?)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+</ul>
+</li>
+<li>
+<a href="#asset-pipeline-%EC%82%AC%EC%9A%A9%EB%B2%95-how-to-use-the-asset-pipeline-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">Asset Pipeline 사용법<span class="original-text-h">(How to Use the Asset Pipeline)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a>
+
+<ul>
+<li><a href="#%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC-%EC%A0%84%EC%9A%A9-%EC%9E%90%EC%9B%90-controller-specific-assets-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">컨트롤러 전용 자원<span class="original-text-h">(Controller Specific Assets)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EC%9E%90%EC%9B%90%EC%9D%98-%EA%B5%AC%EC%84%B1-asset-organization-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">자원의 구성<span class="original-text-h">(Asset Organization)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EC%9E%90%EC%9B%90%EC%97%90-%EB%8C%80%ED%95%9C-%EB%A7%81%ED%81%AC-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0-coding-links-to-assets-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">자원에 대한 링크 작성하기<span class="original-text-h">(Coding Links to Assets)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#manifest-%ED%8C%8C%EC%9D%BC%EA%B3%BC-%EC%A7%80%EC%8B%9C%EC%96%B4%EB%93%A4-manifest-files-and-directives-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">Manifest 파일과 지시어들<span class="original-text-h">(Manifest Files and Directives)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EC%82%AC%EC%A0%84%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0-preprocessing-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">사전처리하기<span class="original-text-h">(Preprocessing)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+</ul>
+</li>
+<li>
+<a href="#%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-in-development-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">개발환경에서<span class="original-text-h">(In Development)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a>
+
+<ul>
+<li><a href="#%EB%94%94%EB%B2%84%EA%B9%85-%ED%95%B4%EC%A0%9C%ED%95%98%EA%B8%B0-turning-debugging-off-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">디버깅 해제하기<span class="original-text-h">(Turning Debugging Off)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+</ul>
+</li>
+<li>
+<a href="#%EC%9A%B4%EC%98%81%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-in-production-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">운영환경에서<span class="original-text-h">(In Production)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a>
+
+<ul>
+<li><a href="#%EC%9E%90%EC%9B%90-%EC%82%AC%EC%A0%84%EC%BB%B4%ED%8C%8C%EC%9D%BC%ED%95%98%EA%B8%B0-precompiling-assets-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">자원 사전컴파일하기<span class="original-text-h">(Precompiling Assets)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EB%A1%9C%EC%BB%AC%EB%A8%B8%EC%8B%A0%EC%97%90%EC%84%9C-%EC%82%AC%EC%A0%84%EC%BB%B4%ED%8C%8C%EC%9D%BC-%EC%9E%91%EC%97%85-local-precompilation-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">로컬머신에서 사전컴파일 작업<span class="original-text-h">(Local Precompilation)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%BB%B4%ED%8C%8C%EC%9D%BC-%EC%9E%91%EC%97%85-live-compilation-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">실시간 컴파일 작업<span class="original-text-h">(Live Compilation)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#cdns">CDNs</a></li>
+</ul>
+</li>
+<li>
+<a href="#pipeline-%EC%98%B5%EC%85%98%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0-customizing-the-pipeline-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">Pipeline 옵션변경하기<span class="original-text-h">(Customizing the Pipeline)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a>
+
+<ul>
+<li><a href="#css-%EC%95%95%EC%B6%95-css-compression-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">CSS 압축<span class="original-text-h">(CSS Compression)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%95%95%EC%B6%95-javascript-compression-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">자바스크립트 압축<span class="original-text-h">(JavaScript Compression)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EC%9E%90%EC%8B%A0%EC%9D%B4-%EC%A0%9C%EC%9E%91%ED%95%9C-%EC%95%95%EC%B6%95%EA%B8%B0-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-using-your-own-compressor-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">자신이 제작한 압축기 사용하기<span class="original-text-h">(Using Your Own Compressor)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EC%9E%90%EC%9B%90-%EA%B2%BD%EB%A1%9C-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0-changing-the-assets-path-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">자원 경로 변경하기<span class="original-text-h">(Changing the <em>assets</em> Path)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#x-sendfile-%ED%97%A4%EB%8D%94-x-sendfile-headers-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">X-Sendfile 헤더<span class="original-text-h">(X-Sendfile Headers)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+</ul>
+</li>
+<li><a href="#%EC%9E%90%EC%9B%90-%EC%BA%90%EC%8B%9C-%EC%A0%80%EC%9E%A5%EC%86%8C-assets-cache-store-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">자원 캐시 저장소<span class="original-text-h">(Assets Cache Store)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EC%9E%90%EC%9B%90%EC%9D%84-%EC%A0%AC%EC%97%90-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0-adding-assets-to-your-gems-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">자원을 젬에 추가하기<span class="original-text-h">(Adding Assets to Your Gems)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EB%98%90%EB%8A%94-%EC%A0%AC%EC%9D%84-%EC%82%AC%EC%A0%84-%EC%B2%98%EB%A6%AC%EA%B8%B0%EB%A1%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0-making-your-library-or-gem-a-pre-processor-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">라이브러리 또는 젬을 사전 처리기로 만들기<span class="original-text-h">(Making Your Library or Gem a Pre-Processor)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EC%9D%B4%EC%A0%84-%EB%B2%84%EC%A0%84%EC%9D%98-%EB%A0%88%EC%9D%BC%EC%8A%A4%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C%ED%95%98%EA%B8%B0-upgrading-from-old-versions-of-rails-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">이전 버전의 레일스로부터 업그레이드하기<span class="original-text-h">(Upgrading from Old Versions of Rails)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+</ol>
+
+          </div>
+
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <h3 id="asset-pipeline이란-무엇인가-questionmark-what-is-the-asset-pipeline-questionmark-원문·전체">1 Asset Pipeline이란 무엇인가?<span class="original-text-h">(What is the Asset Pipeline?)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h3><p>asset pipeline은 자바스크립트와 CSS 자원을 합치고 최소화 또는 압축하기 위한 프레임워크를 제공해 줍니다. 또한 Coffeescript, Sass, ERB와 같은 언어로 이러한 자원을 작성할 수 있도록 해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The asset pipeline provides a framework to concatenate and minify or compress JavaScript and CSS assets. It also adds the ability to write these assets in other languages such as CoffeeScript, Sass and ERB.</p><p>asset piepline을 레일스의 핵심 기능으로 만든 것은 모든 개발자들이 Sprockets라는 라이브러리를 이용하여 자원을 전처리하고 압축하고 최소화할 수 있는 잇점을 가질 수 있게 해 줍니다. 이것은 RailsConf 2011에서 DHH가 자신의 키노드에서 소개한 "fast by default" 전략의 일부분입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Making the asset pipeline a core feature of Rails means that all developers can benefit from the power of having their assets pre-processed, compressed and minified by one central library, Sprockets. This is part of Rails' "fast by default" strategy as outlined by DHH in his keynote at RailsConf 2011.</p><p>asset pipeline은 디폴트 상태에서 별다른 조치없이 바로 사용할 수 있습니다. 그러나 <code>config/application.rb</code> 파일에서 application 클래스 정의내에 아래의 코드라인을 추가하여 asset pipeline을 사용하지 않도록 설정할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The asset pipeline is enabled by default. It can be disabled in <code>config/application.rb</code> by putting this line inside the application class definition:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.enabled = false
+
+</pre>
+</div>
+<p>또한 레일스 프로젝트를 새로 만들 때 아래와 같이 <code>--skip-sprockets</code> 옵션을 추가하여 asset pipeline을 사용하지 않도록 할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You can also disable the asset pipeline while creating a new application by passing the <code>--skip-sprockets</code> option.</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+rails new appname --skip-sprockets
+
+</pre>
+</div>
+<p>의도적으로 asset pipeline을 사용하지 않을 것이 아니라면 새로 생성하는 모든 어플리케이션에 대해서 디폴트 상태를 사용해야만 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You should use the defaults for all new applications unless you have a specific reason to avoid the asset pipeline.</p><h4 id="주요-특징-main-features-원문·전체">1.1 주요 특징<span class="original-text-h">(Main Features)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>첫번째 특징은 자원을 합치는 것입니다. 이것은, 브라우저가 웹페이지를 보여주기 위해 서버에 요청하는 수를 줄일 수 있기 때문에, 운영환경에서 중요한 기능입니다. 웹브라우저는 동시에 요청할 수 있는 수가 제한되어 있어서 요청을 적게한다는 것은 어플리케이션의 로딩 속도를 보다 빠르게 할 수 있다는 것을 의미합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The first feature of the pipeline is to concatenate assets. This is important in a production environment, because it can reduce the number of requests that a browser makes to render a web page. Web browsers are limited in the number of requests that they can make in parallel, so fewer requests can mean faster loading for your application.</p><p>레일스 2.x 에서는 <code>javascript_include_tag</code>와 <code>stylesheet_link_tag</code> 메소드에 <code>cache: true</code> 옵션을 추가하여 자바스크립트와 CSS 자원을 합칠 수 있도록 했습니다. 그러나 이러한 방법은 몇가지 제한점이 있습니다. 예를 들어, 캐시를 미리 만들 수 없고 다른 라이브러리에서 제공하는 자원들을 분명하게 포함할 수 없다는 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Rails 2.x introduced the ability to concatenate JavaScript and CSS assets by placing <code>cache: true</code> at the end of the <code>javascript_include_tag</code> and <code>stylesheet_link_tag</code> methods. But this technique has some limitations. For example, it cannot generate the caches in advance, and it is not able to transparently include assets provided by third-party libraries.</p><p>3.1 버전부터는, 모든 자바스크립트를 하나의 총괄 <code>.js</code> 파일로, 모든 CSS 파일을 하나의 총괄 <code>.css</code> 파일로 합치는 것을 디폴트로 지원합니다. 나중에 알게 되겠지만, 이러한 전략을 변경해서 선호하는 방식으로 파일들을 그룹화할 수 있습니다. 운영환경에서, 레일스는 각 파일명에 MD5 fingerprint를 삽입하여 해당 파일이 웹브라우저에서 캐시상태로 만들어 지도록 합니다. 이 fingerprint를 변경하여 해당 캐시 파일을 무효화할 수 있는데, 이것은 파일 컨텐츠를 변경할 때마다 자동으로 발생하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Starting with version 3.1, Rails defaults to concatenating all JavaScript files into one master <code>.js</code> file and all CSS files into one master <code>.css</code> file. As you'll learn later in this guide, you can customize this strategy to group files any way you like. In production, Rails inserts an MD5 fingerprint into each filename so that the file is cached by the web browser. You can invalidate the cache by altering this fingerprint, which happens automatically whenever you change the file contents.</p><p>asset pipeline의 두번째 특징은, 자원을 최소화 또는 압축하는 것입니다. CSS 파일에 대해서는, 코멘트 내용과 whitespace를 제거하므로써 CSS 파일의 크기를 줄이게 됩니다. 자바스크리브에서는, 좀 더 복잡한 과정이 필요할 데, 다양한 내장 옵션을 지정하거나 자신의 것으로 지정할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The second feature of the asset pipeline is asset minification or compression. For CSS files, this is done by removing whitespace and comments. For JavaScript, more complex processes can be applied. You can choose from a set of built in options or specify your own.</p><p>asset pipeline의 세번째 특징은, 보다 높은 차원의 언어를 사용하여 자원을 코딩할 수 있도록 해 주는데, 이것은 사전 컴파일 과정을 거쳐서 실제 사용가능한 자원으로 만들어지게 됩니다. 지원되는 언어로는 CSS에 대해서는 Sass, 자바스크립트에 대해서는 Coffeescript, 그리고 CSS와 자바스크립트 모두에 대해서 ERB가 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The third feature of the asset pipeline is that it allows coding assets via a higher-level language, with precompilation down to the actual assets. Supported languages include Sass for CSS, CoffeeScript for JavaScript, and ERB for both by default.</p><h4 id="fingerprinting의-정의와-유념해야할-이유-what-is-fingerprinting-and-why-should-i-care-questionmark-원문·전체">1.2 Fingerprinting의 정의와  유념해야할 이유<span class="original-text-h">(What is Fingerprinting and Why Should I Care?)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>Fingerprinting이라는 것은 파일이름을 파일의 내용에 의존해서 만드는 기술을 말합니다. 따라서 파일 내용이 변경될 때 파일이름 또한 변경됩니다. 파일내용이 static하거나 거의 변하지 않는 경우에는, 다른 서버에 위치하거나 배포 날짜가 다른 경우에도 해당 파일의 두가지 버전이 일치하는지를 쉽게 알려 주게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Fingerprinting is a technique that makes the name of a file dependent on the contents of the file. When the file contents change, the filename is also changed. For content that is static or infrequently changed, this provides an easy way to tell whether two versions of a file are identical, even across different servers or deployment dates.</p><p>특정 파일명이 유일하고 파일내용에 근거하여 만들어질 때, HTTP 헤더를 설정하여 캐시가 어느 곳(CDN, ISP, 네트워크 장비, 또는 웹브라우저)에 위치하더라도 자신만의 파일 복사본을 유지하도록 할 수 있습니다. 해당 파일의 내용이 업데이트될 때 fingerprint는 변경될 것입니다. 이것은 원격상의 클라이언트가 해당 파일의 새로운 복사본을 요청하도록 할 것입니다. 이러한 것을 일반적으로 <em>cache busting</em> 이라고 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">When a filename is unique and based on its content, HTTP headers can be set to encourage caches everywhere (whether at CDNs, at ISPs, in networking equipment, or in web browsers) to keep their own copy of the content. When the content is updated, the fingerprint will change. This will cause the remote clients to request a new copy of the content. This is generally known as <em>cache busting</em>.</p><p>fingerprinting에 대해서 레일스가 사용하는 기술은 <em>파일내용의 해시값</em> 을 대개 파일명의 끝에 삽입하는 것입니다. 예를 들어, <code>global.css</code>라는 CSS 파일은 해당 파일내용의 MD5 digest값이 파일명의 끝에 삽입될 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The technique that Rails uses for fingerprinting is to insert a hash of the content into the name, usually at the end. For example a CSS file <code>global.css</code> could be renamed with an MD5 digest of its contents:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+global-908e25f4bf641868d8683022a5b62f54.css
+
+</pre>
+</div>
+<p>이러한 것이 바로 레일스 asset pipeline이 채택한 전략입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This is the strategy adopted by the Rails asset pipeline.</p><p>레일스의 예전 전략은 날짜를 근거로 한 쿼리문자열을 내장 헬퍼에 연결되는 모든 자원에 추가하는 것이었습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Rails' old strategy was to append a date-based query string to every asset linked with a built-in helper. In the source the generated code looked like this:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+/stylesheets/global.css?1309495796
+
+</pre>
+</div>
+<p>쿼리문자열 전략은 몇가지 단점이 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The query string strategy has several disadvantages:</p>
+<ol>
+<li><p><strong>파일명이 단지 쿼리파라메터만 다르다하여 모두 캐시되지는 않는다 것입니다.</strong><br>
+<a href="http://www.stevesouders.com/blog/2008/08/23/revving-filenames-dont-use-querystring/">Steve Souders</a>이 추천하는 것은 캐시하려는 리소스에 대해서 쿼리문자열을 사용하지 말라는 것입니다. 또한 그는 이러한 경우 요청 중 5-20%는 캐시되지 않을 것이라는 것을 알게 되었습니다. 특히 쿼리문자열은 캐시 유효성여부를 알기 위해서 몇몇 CDN에 접속할 때 전혀 작동하지 않게 됩니다. [[[<strong>Not all caches will reliably cache content where the filename only differs by query parameters</strong><br>
+<a href="http://www.stevesouders.com/blog/2008/08/23/revving-filenames-dont-use-querystring/">Steve Souders recommends</a>, "...avoiding a querystring for cacheable resources". He found that in this case 5-20% of requests will not be cached. Query strings in particular do not work at all with some CDNs for cache invalidation.]]]</p></li>
+<li><p><strong>다중 서버 환경에서 파일명은 노드에 따라 변경될 수 있다.</strong><br>
+레일스 2.x 에서 디폴트 쿼리문자열은 파일의 변경시간에 근거해서 작성됩니다. 따라서 자원들이 특정 클러스트로 배포될 때 타임스탬프가 동일하다는 것을 보장할 수 없게 되는데, 결과적으로 요청을 처리하는 서버에 따라 다른 값을 가지게 되기 때문입니다. [[[<strong>The file name can change between nodes in multi-server environments.</strong><br>
+The default query string in Rails 2.x is based on the modification time of the files. When assets are deployed to a cluster, there is no guarantee that the timestamps will be the same, resulting in different values being used depending on which server handles the request.]]]</p></li>
+<li><p><strong>과도한 캐시무효화</strong><br>
+새로운 버전의 코드와 함께 정적 자원을 배포할 때 이러한 모든 파일들의 최종변경일자인 mtime값도 변경되기 때문에, 모든 원격 클라이언트들로 하여금, 자원의 내용이 변경되지 않는 경우에도 강제로 이들 정적 자원들을 재차 다운로드하도록 할 것입니다. [[[<strong>Too much cache invalidation</strong><br>
+When static assets are deployed with each new release of code, the mtime(time of last modification) of <em>all</em> these files changes, forcing all remote clients to fetch them again, even when the content of those assets has not changed.]]]</p></li>
+</ol>
+<p>Fingerprinting은 쿼리문자열을 사용하지 않음으로써 이러한 문제점들을 해결하고 파일명들이 내용에 근거해서 일관성을 가지도록 해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Fingerprinting fixes these problems by avoiding query strings, and by ensuring that filenames are consistent based on their content.</p><p>운영환경에서는 Fingerprinting이 디폴트로 작동하지만 다른 환경에서는 사용할 수 없습니다. 설정파일에서 <code>config.assets.digest</code> 옵션을 이용하여 이 기능의 사용여부를 지정할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Fingerprinting is enabled by default for production and disabled for all other environments. You can enable or disable it in your configuration through the <code>config.assets.digest</code> option.</p><p>더 자세한 내용을 읽고자 한다면 아래의 링크를 참고하시기 바랍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">More reading:</p>
+<ul>
+<li><a href="http://code.google.com/speed/page-speed/docs/caching.html">Optimize caching</a></li>
+<li><a href="http://www.stevesouders.com/blog/2008/08/23/revving-filenames-dont-use-querystring/">Revving Filenames: don’t use querystring</a></li>
+</ul>
+<h3 id="asset-pipeline-사용법-how-to-use-the-asset-pipeline-원문·전체">2 Asset Pipeline 사용법<span class="original-text-h">(How to Use the Asset Pipeline)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h3><p>레일스 이전 버전에서는, 모든 자원이 <code>public</code> 디렉토리의 하위 디렉토리인 <code>images</code>, <code>javascripts</code>, <code>stylesheets</code>에 위치했었습니다. Asset pipeline을 사용하게 되면, <code>app/assets</code> 디렉토리에 자원들이 위치하게 됩니다. 이 디렉토리 상의 파일들은 sprockets 젬을 설치할 경우 Sprockets 미들웨어에 의해서 처리됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In previous versions of Rails, all assets were located in subdirectories of <code>public</code> such as <code>images</code>, <code>javascripts</code> and <code>stylesheets</code>. With the asset pipeline, the preferred location for these assets is now the <code>app/assets</code> directory. Files in this directory are served by the Sprockets middleware included in the sprockets gem.</p><p>Asset pipeline을 사용할 때도 자원들을 <code>public</code> 디렉토리에 둘 수 있습니다. <code>public</code> 디렉토리상의 모든 자원들은 어플리케이션이나 웹서버에 의해서 static 파일로서 사용될 것입니다. 따라서 사용하기 전에 어떤 전처리과정이 필요한 파일들은 <code>app/assets</code> 디렉토리에 두어야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Assets can still be placed in the <code>public</code> hierarchy. Any assets under <code>public</code> will be served as static files by the application or web server. You should use <code>app/assets</code> for files that must undergo some pre-processing before they are served.</p><p>운영환경에서는, 레일스가 디폴트로 이러한 자원 파일들을 사전 컴파일해서 <code>public/assets</code> 디렉토리에 둡니다. 이 사전 컴파일된 파일들은 웹서버가 static 자원으로 사용하게 됩니다. <code>app/assets</code> 디렉토리에 있는 파일들은 운영환경에서 절대로 직접 사용되지 않습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In production, Rails precompiles these files to <code>public/assets</code> by default. The precompiled copies are then served as static assets by the web server. The files in <code>app/assets</code> are never served directly in production.</p><h4 id="컨트롤러-전용-자원-controller-specific-assets-원문·전체">2.1 컨트롤러 전용 자원<span class="original-text-h">(Controller Specific Assets)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>임의의 scaffold 또는 컨트롤러를 생성할 때 레일스는 해당 컨트롤러 전용 자바스크립 파일(또는 <code>Gemfile</code>에 <code>coffeescript-rails</code> 젬이 있다면 CoffeeScript 파일)과 CSS 파일(<code>Gemfile</code> 내에 <code>sass-rails</code>젬이 있다면 SCSS 파일)도 동시에 생성해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">When you generate a scaffold or a controller, Rails also generates a JavaScript file (or CoffeeScript file if the <code>coffee-rails</code> gem is in the <code>Gemfile</code>) and a Cascading Style Sheet file (or SCSS file if <code>sass-rails</code> is in the <code>Gemfile</code>) for that controller.</p><p>예를 들어, <code>ProjectsController</code>를 생성한다면, 레일스는 동시에 <code>app/assets/javascripts/projects.js.coffee</code>와 <code>app/assets/stylesheets/projects.css.scss</code> 파일을 생성해 줍니다. 디폴트 상태에서, 이러한 파일들은 <code>require_tree</code> 명령어를 사용한 후에 어플리케이션에서 사용할 수 있게 됩니다. require_tree에 대한 자세한 내용은 <a href="#manifest-files-and-directives">Manifest Files and Directives</a>를 보기 바랍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">For example, if you generate a <code>ProjectsController</code>, Rails will also add a new file at <code>app/assets/javascripts/projects.js.coffee</code> and another at <code>app/assets/stylesheets/projects.css.scss</code>. By default these files will be ready to use by your application immediately using the <code>require_tree</code> directive. See <a href="#manifest-files-and-directives">Manifest Files and Directives</a> for more details on require_tree.</p><p>또한 <code>&lt;%= javascript_include_tag params[:controller] %&gt;</code> 또는 <code>&lt;%= stylesheet_link_tag params[:controller] %&gt;</code>를 사용하게 되면 전용 CSS와 자바스크립트를 각각의 컨트롤러에서만 사용할 수 있습니다. 주의할 것은 <code>require_tree</code> 명령을 사용하지 않았는지를 확인해야 합니다. 왜냐하면 결과적으로 자원이 한번이상 포함될 것이기 때문입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You can also opt to include controller specific stylesheets and JavaScript files only in their respective controllers using the following: <code>&lt;%= javascript_include_tag params[:controller] %&gt;</code> or <code>&lt;%= stylesheet_link_tag params[:controller] %&gt;</code>. Ensure that you are not using the <code>require_tree</code> directive though, as this will result in your assets being included more than once.</p><div class="warning">
+<p> (운영환경에서는 디폴트 상태로) 자원을 사전 컴파일하게 되는데, 컨트롤러 전용 자원이 해당 페이지가 로딩될 때마다 사전 컴파일되는 것을 확인할 필요가 있습니다. 디폴트로, .coffee 와 .scss 파일은 사전 컴파일되지 않습니다. 개발환경에서는 이러한 파일들이 임시로 컴파일되기 때문에 사전 컴파일된 듯한 효과를 보이게 되어 제대로 동작할 것입니다. 그러나 운영환경에서 실행할 때는, 디폴트로 실시간 컴파일작업이 꺼진 상태이므로 500 에러가 발생하게 될 것입니다. 사전 컴파일 작업이 어떻게 동작하는지에 대한 자세한 내용은 <a href="#precompiling-assets">Precompiling Assets</a>를 보기 바랍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">When using asset precompilation (the production default), you will need to ensure that your controller assets will be precompiled when loading them on a per page basis. By default .coffee and .scss files will not be precompiled on their own. This will result in false positives during development as these files will work just fine since assets will be compiled on the fly. When running in production however, you will see 500 errors since live compilation is turned off by default. See <a href="#precompiling-assets">Precompiling Assets</a> for more information on how precompiling works.</p>
+</div><div class="note">
+<p> CoffeeScript를 사용하기 위해서는 ExecJS를 지원하는 런타임 라이브러리가 설치되어 있어야 합니다. Mac OS X 또는 윈도우즈를 사용하는 경우라면, 해당 운영 시스템에 자바스크립트 런타임 라이브러리를 설치해 주어야 합니다. 지원 가능한 모든 자바스크립트 런타임 라이브러리를 알기를 원하면 <a href="https://github.com/sstephenson/execjs#readme">ExecJS</a> 문서를 참고하기 바랍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">You must have an ExecJS supported runtime in order to use CoffeeScript. If you are using Mac OS X or Windows you have a JavaScript runtime installed in your operating system. Check <a href="https://github.com/sstephenson/execjs#readme">ExecJS</a> documentation to know all supported JavaScript runtimes.</p>
+</div><p>물론, <code>config/application.rb</code> 설정 파일에 아래의 코드라인을 추가해서 컨트롤러가 생성될 때 자원 파일들이 자동으로 생성되지 않도록 방지할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You can also disable the generation of asset files when generating a controller by adding the following to your <code>config/application.rb</code> configuration:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.generators do |g|
+  g.assets false
+end
+
+</pre>
+</div>
+<h4 id="자원의-구성-asset-organization-원문·전체">2.2 자원의 구성<span class="original-text-h">(Asset Organization)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>Pipeline 자원들은 어플리케이션내의 <code>app/assets</code>, <code>lib/assets</code>, <code>vendor/assets</code> 디렉토리 중의 하나에 위치할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Pipeline assets can be placed inside an application in one of three locations: <code>app/assets</code>, <code>lib/assets</code> or <code>vendor/assets</code>.</p>
+<ul>
+<li>
+<p><code>app/assets</code> 디렉토리에는, 예를 들어, 개발자가 어플리케이션에서 사용하기 위해서는 추가하는 이미지 파일, 자바스크립트 파일 또는 스타일시트 파일들을 둘 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text"><code>app/assets</code> is for assets that are owned by the application, such as custom images, JavaScript files or stylesheets.</p>
+</li>
+<li>
+<p><code>lib/assets</code> 디렉토리에는, 어플리케이션의 영역을 벗어나는 라이브러리나, 어플케이션 간에 공유할 수 있는 라이브러리를 위한 자원들을 둘 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text"><code>lib/assets</code> is for your own libraries' code that doesn't really fit into the scope of the application or those libraries which are shared across applications.</p>
+</li>
+<li>
+<p><code>vendor/assets</code> 디렉토리에는, 자바스크립트 프러그인과 CSS 프레임워크와 같은 외부에서 사용하는 자원들을 둘 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text"><code>vendor/assets</code> is for assets that are owned by outside entities, such as code for JavaScript plugins and CSS frameworks.</p>
+</li>
+</ul>
+<h5 id="검색-경로-search-paths-원문·전체">2.2.1 검색 경로<span class="original-text-h">(Search Paths)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h5><p>임의의 manifest 파일이나 헬퍼 파일이 특정 파일을 참조할 때 Sprockets는 3개의 디폴트 위치를 검색하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">When a file is referenced from a manifest or a helper, Sprockets searches the three default asset locations for it.</p><p>디폴트 위치는 <code>app/assets/images</code>와 3개의 모든 위치에서 <code>javascripts</code>, <code>stylesheets</code> 라는 하위디렉토리입니다. 그러나 이러한 하위디렉토리는 특별한 의미가 있는 것은 아닙니다. <code>assets/*</code> 아래의 모든 경로를 찾게 될 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The default locations are: <code>app/assets/images</code> and the subdirectories <code>javascripts</code> and <code>stylesheets</code> in all three asset locations, but these subdirectories are not special. Any path under <code>assets/*</code> will be searched.</p><p>예를 들어, 아래의 파일들은 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">For example, these files:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+app/assets/javascripts/home.js
+lib/assets/javascripts/moovinator.js
+vendor/assets/javascripts/slider.js
+vendor/assets/somepackage/phonebox.js
+
+</pre>
+</div>
+<p>아래의 manifest 파일에서 각각 참조될 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">would be referenced in a manifest like this:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+//= require home
+//= require moovinator
+//= require slider
+//= require phonebox
+
+</pre>
+</div>
+<p>하위디렉토리에 위치하는 자원들도 검색할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Assets inside subdirectories can also be accessed.</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+app/assets/javascripts/sub/something.js
+
+</pre>
+</div>
+<p>위의 파일은 아래와 같이 참조할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">is referenced as:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+//= require sub/something
+
+</pre>
+</div>
+<p>레일스 콘솔에서 <code>Rails.application.config.assets.paths</code>로 Sprockets의 검색경로를 확인할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You can view the search path by inspecting <code>Rails.application.config.assets.paths</code> in the Rails console.</p><p>레일스 디폴트 경로인 <code>assets/*</code> 뿐만아니라, <code>config/application.rb</code> 파일에 아래와 같이 코드라인을 추가하여, 특정 경로(절대경로)를 pipleline에 추가할 수도 있습니다. 예를 들면, <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Besides the standard <code>assets/*</code> paths, additional (fully qualified) paths can be added to the pipeline in <code>config/application.rb</code>. For example:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.paths &lt;&lt; Rails.root.join("lib", "videoplayer", "flash")
+
+</pre>
+</div>
+<p>검색경로상에 나타나는 순서대로 경로 탐색이 실행됩니다. 디폴트 상태에서는 <code>app/assets</code> 경로가 우선적으로 검색되고 동일한 파일이 <code>lib</code>과 <code>vendor</code> 디렉토리상에 있을 때는 검색되지 않게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Paths are traversed in the order that they occur in the search path. By default, this means the files in <code>app/assets</code> take precedence, and will mask corresponding paths in <code>lib</code> and <code>vendor</code>.</p><p>주목할 것은, 하나의 manifest 파일에 등록되지 않은 파일들을 참조하고자 할 때는 사전컴파일 경로에 해당 파일들을 등록해 주어야 한다는 것입니다. 그렇지 않으면 운영환경에서 해당 파일들을 사용하지 못할 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">It is important to note that files you want to reference outside a manifest must be added to the precompile array or they will not be available in the production environment.</p><h5 id="인덱스-파일-이용하기-using-index-files-원문·전체">2.2.2 인덱스 파일 이용하기<span class="original-text-h">(Using Index Files)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h5><p>Spockets는 특수한 목적으로 연관확장자를 가지는 <code>index</code>라는 이름을 가지는 파일들을 이용합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Sprockets uses files named <code>index</code> (with the relevant extensions) for a special purpose.</p><p>예를 들면, 많은 모듈을 포함하고 있는 jQuery 라이브러리가 <code>lib/assets/library_name</code> 디렉토리에 저장되어 있을 경우, <code>lib/assets/library_name/index.js</code> 파일은 이 라이브러리에 있는 모든 파일에 대한 manifest 파일로서 기능을 하게 됩니다. 이 파일은 필요로하는 모든 파일들에 대한 목록을 순차적으로 포함하거나 아니면 간단하게 <code>require_tree</code> 명령어를 포함할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">For example, if you have a jQuery library with many modules, which is stored in <code>lib/assets/library_name</code>, the file <code>lib/assets/library_name/index.js</code> serves as the manifest for all files in this library. This file could include a list of all the required files in order, or a simple <code>require_tree</code> directive.</p><p>이 라이브러리 전체는 다음과 같이 어플리케이션 manifest 파일에서 접근할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The library as a whole can be accessed in the site's application manifest like so:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+//= require library_name
+
+</pre>
+</div>
+<p>이렇게 하면 관리가 쉬워지고 관련된 코드들 다른 곳에 포함하기 전에 그룹화하여 명확하게 유지할 수 있게 해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This simplifies maintenance and keeps things clean by allowing related code to be grouped before inclusion elsewhere.</p><h4 id="자원에-대한-링크-작성하기-coding-links-to-assets-원문·전체">2.3 자원에 대한 링크 작성하기<span class="original-text-h">(Coding Links to Assets)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>Sprockets 자체는 자원에 접근하기 위한 메소드를 새로 추가하지 않지만, <code>javascript_include_tag</code>와 <code>stylesheet_link_tag</code> 메소드를 사용할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Sprockets does not add any new methods to access your assets - you still use the familiar <code>javascript_include_tag</code> and <code>stylesheet_link_tag</code>.</p><div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;%= stylesheet_link_tag "application" %&gt;
+&lt;%= javascript_include_tag "application" %&gt;
+
+</pre>
+</div>
+<p>일반적인 뷰파일에서, 다음과 같이 <code>assets/images</code> 디렉토리에 있는 이미지에 접근할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In regular views you can access images in the <code>assets/images</code> directory like this:</p><div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;%= image_tag "rails.png" %&gt;
+
+</pre>
+</div>
+<p>어플리케이션에서 pipeline이 설정되어 있고 현재의 실행환경에서 작동하도록 되어 있다면, 이 이미지 파일은 Sprockets가 소스를 가공하여 제공하게 됩니다. 만약 특정 파일이 <code>public/assets/rails.png</code>에 위치한다면 이 때는 웹서버가 소스를 제공하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Provided that the pipeline is enabled within your application (and not disabled in the current environment context), this file is served by Sprockets. If a file exists at <code>public/assets/rails.png</code> it is served by the web server.</p><p>또 다른 방법으로, <code>public/assets/rails-af27b6a414e6da00003503148be9b409.png</code>와 같이 MD5 해시값을 가지는 파일에 대한 요청이 들어올 때도 동일하게 처리됩니다. 이러한 해시값이 어떻게 생성되는지는 본 가이드의 후반부에 있는 <a href="#in-production">In Production</a>에서 다루게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Alternatively, a request for a file with an MD5 hash such as <code>public/assets/rails-af27b6a414e6da00003503148be9b409.png</code> is treated the same way. How these hashes are generated is covered in the <a href="#in-production">In Production</a> section later on in this guide.</p><p>또한 Sprockets는 표준 어플리케이션 경로와 레일스 엔진에서 추가하는 모든 경로를 포함하는 것으로 <code>config.assets.paths</code>에 명시된 경로를 검색할 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Sprockets will also look through the paths specified in <code>config.assets.paths</code> which includes the standard application paths and any path added by Rails engines.</p><p>이미지들은 필요할 경우 하위디렉토리로 위치시킬 수 있는데, 이 때는 태크에 디렉토리명을 명시하여 접근할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Images can also be organized into subdirectories if required, and they can be accessed by specifying the directory's name in the tag:</p><div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;%= image_tag "icons/rails.png" %&gt;
+
+</pre>
+</div>
+<div class="warning">
+<p> 자원을 미리 컴파일해 두고자 할 경우(아래에서 <a href="#in-production">In Production</a>을 보기 바랍니다), 존재하지 않는 특정 자원으로의 연결시도는 호출페이지에서 예외를 발생시킬 것입니다. 여기에는 빈 문자열로의 연결시도도 포함됩니다. 따라서, 데이터를 넘겨주는 <code>image_tag</code>와 기타 다른 헬퍼메소드를 사용할 때는 주의해야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">If you're precompiling your assets (see <a href="#in-production">In Production</a> below), linking to an asset that does not exist will raise an exception in the calling page. This includes linking to a blank string. As such, be careful using <code>image_tag</code> and the other helpers with user-supplied data.</p>
+</div><h5 id="css-와-erb-css-and-erb-원문·전체">2.3.1 CSS 와 ERB<span class="original-text-h">(CSS and ERB)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h5><p>asset pipeline은 자동으로 자원내에 포함된 ERB 코드를 실행해 줍니다. 즉, 특정 CSS 자원에 <code>erb</code> 확장자를 붙일 경우(예, <code>application.css.erb</code>), <code>asset_path</code>와 같은 헬퍼메소드들을 CSS 문법내에서 사용할 수 있게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The asset pipeline automatically evaluates ERB. This means that if you add an <code>erb</code> extension to a CSS asset (for example, <code>application.css.erb</code>), then helpers like <code>asset_path</code> are available in your CSS rules:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+.class { background-image: url(&lt;%= asset_path 'image.png' %&gt;) }
+
+</pre>
+</div>
+<p>이것은 참조되는 특정 자원에 대한 경로를 작성해 줍니다. 이 예에서는, 참조하게 되는 <code>app/assets/images/image.png</code>와 같은 자원 로드 경로 중에 하나에 해당 이미지가 존재하는 것으로 이해하게 될 것입니다. 그러나 이 이미지 파일이 이미 fingerprinting되어 <code>public/assets</code> 디렉토리에 존재하게 될 경우에는 이 경로를 참조하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This writes the path to the particular asset being referenced. In this example, it would make sense to have an image in one of the asset load paths, such as <code>app/assets/images/image.png</code>, which would be referenced here. If this image is already available in <code>public/assets</code> as a fingerprinted file, then that path is referenced.</p><p>이미지 데이터를 직접 CSS 파일에 삽입하는 방법인 <a href="http://en.wikipedia.org/wiki/Data_URI_scheme">data URI</a>를 이용하고자 할 경우, <code>asset_data_uri</code> 헬퍼메소드를 이용할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you want to use a <a href="http://en.wikipedia.org/wiki/Data_URI_scheme">data URI</a> — a method of embedding the image data directly into the CSS file — you can use the <code>asset_data_uri</code> helper.</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+#logo { background: url(&lt;%= asset_data_uri 'logo.png' %&gt;) }
+
+</pre>
+</div>
+<p>위 코드라인은 정해진 포맷형태로 작성된 데이터 URI를 CSS 소스파일로 삽입해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This inserts a correctly-formatted data URI into the CSS source.</p><p>주의할 것은 닫는 태크로 <code>-%&gt;</code> 와 같이 <code>-</code>를 추가한 형태를 사용해서는 안된다는 것입니다(에러발생함). 반드시 <code>%&gt;</code>로 닫아 줘야 한다는 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Note that the closing tag cannot be of the style <code>-%&gt;</code>.</p><h5 id="css-와-sass-css-and-sass-원문·전체">2.3.2 CSS 와 Sass<span class="original-text-h">(CSS and Sass)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h5><p>asset pipeline을 사용할 때는, 자원에 대한 경로를 다시 작성해야 하며, 이미지, 폰트, 비디오, 오디오, 자바스크립트, 스타일시트 파일에서 <code>sass-rails</code> 젬이 제공해 주는 <code>-url</code>과 <code>-path</code> 헬퍼메소드(sass로 작성시에는 하이픈으로 연결, 루비로 작성시에는 밑줄로 연결)를 사용하면 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">When using the asset pipeline, paths to assets must be re-written and <code>sass-rails</code> provides <code>-url</code> and <code>-path</code> helpers (hyphenated in Sass, underscored in Ruby) for the following asset classes: image, font, video, audio, JavaScript and stylesheet.</p>
+<ul>
+<li>
+<code>image-url("rails.png")</code> becomes <code>url(/assets/rails.png)</code>
+</li>
+<li>
+<code>image-path("rails.png")</code> becomes <code>"/assets/rails.png"</code>.</li>
+</ul>
+<p>더 일반적인 형태를 사용할 수 있지만 이 때는 자원경로와 자원의 종류를 모두 명시해 주어야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The more generic form can also be used but the asset path and class must both be specified:</p>
+<ul>
+<li>
+<code>asset-url("rails.png", image)</code> becomes <code>url(/assets/rails.png)</code>
+</li>
+<li>
+<code>asset-path("rails.png", image)</code> becomes <code>"/assets/rails.png"</code>
+</li>
+</ul>
+<h5 id="javascript-coffeescript-와-erb-javascript-coffeescript-and-erb-원문·전체">2.3.3 JavaScript/CoffeeScript 와 ERB<span class="original-text-h">(JavaScript/CoffeeScript and ERB)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h5><p>자바스크립트 자원에 <code>erb</code> 확장자를 붙여 <code>application.js.erb</code>와 같이 만들어 주면, 자바스크립트 코드내에서 <code>asset_path</code> 헬퍼메소드를 사용할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you add an <code>erb</code> extension to a JavaScript asset, making it something such as <code>application.js.erb</code>, then you can use the <code>asset_path</code> helper in your JavaScript code:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$('#logo').attr({
+  src: "&lt;%= asset_path('logo.png') %&gt;"
+});
+
+</pre>
+</div>
+<p>위의 코드는 참조하게 될 특정 자원에 대한 경로를 작성해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This writes the path to the particular asset being referenced.</p><p>같은 원리로, CoffeeScript 파일에 <code>erb</code> 확장자를 붙이면(예, <code>application.js.coffee.erb</code>), <code>asset_path</code> 헬퍼메소드를 사용할 수 있게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Similarly, you can use the <code>asset_path</code> helper in CoffeeScript files with <code>erb</code> extension (e.g., <code>application.js.coffee.erb</code>):</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$('#logo').attr src: "&lt;%= asset_path('logo.png') %&gt;"
+
+</pre>
+</div>
+<h4 id="manifest-파일과-지시어들-manifest-files-and-directives-원문·전체">2.4 Manifest 파일과 지시어들<span class="original-text-h">(Manifest Files and Directives)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>Sprockets는 manifest 파일을 이용해서 어떤 자원들을 포함해서 웹서버로 제공할 것인지를 결정하게 됩니다. 이러한 manifest 파일들은 <em>전용지시어</em> 를 포함하는데, 이 지시어는 Sprockets에게 단일 CSS 또는 자바스크립트 파일을 만드는데 어떤 파일들을 필요로하는지 알려주게 됩니다. 이 지시어를 통해서 Sprockets는 명시된 파일들을 로드해서 필요한 경우 일련의 처리과정을 거쳐서 하나의 단일 파일로 합치고, <code>Rails.application.config.assets.compress</code>이 true로 설정되어 있을 경우, 압축도 하게 됩니다. 이와 같이 여러개의 파일보다 단일 파일을 제공하게 되면, 브라우저가 자원에 대한 요청수를 줄일 수 있어 페이지 로드 시간을 크게 줄일 수 있게 됩니다. 또한, 압축과정을 거치게 되면 파일크기도 줄일 수 있어 브라우저가 보다 빠르게 파일을 다운로드할 수 있게 해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Sprockets uses manifest files to determine which assets to include and serve. These manifest files contain <em>directives</em> — instructions that tell Sprockets which files to require in order to build a single CSS or JavaScript file. With these directives, Sprockets loads the files specified, processes them if necessary, concatenates them into one single file and then compresses them (if <code>Rails.application.config.assets.compress</code> is true). By serving one file rather than many, the load time of pages can be greatly reduced because the browser makes fewer requests. Compression also reduces the file size enabling the browser to download it faster.</p><p>예를 들어, 새로 생성한 레일스 어플리케이션은 아래와 같은 코드라인을 포함하는, 디폴트로 작성되는, <code>app/assets/javascripts/application.js</code> 파일을 가지게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">For example, a new Rails application includes a default <code>app/assets/javascripts/application.js</code> file which contains the following lines:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+// ...
+//= require jquery
+//= require jquery_ujs
+//= require_tree .
+
+</pre>
+</div>
+<p>자바스크립트 파일에서는 지시어가 <code>//=</code>로 시작합니다. 위의 예에서는, <code>require</code>와 <code>require_tree</code> 지시어를 사용하고 있습니다. <code>require</code> 지시어를 사용하면 Sprockets에게 필요로 하는 파일들을 알려주게 됩니다. 여기서는 Sprockets가 검색하게되는 경로상에 존재하는 <code>jquery.js</code>와 <code>jquery_ujs.js</code> 파일을 필요로 하게 됩니다. 이때 명시적으로 파일의 확장자까지 지정할 필요는 없습니다. Sprockets가 하나의 <code>.js</code> 파일내에서 require되는 파일들이 <code>.js</code> 확장자를 가지는 것으로 가정합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In JavaScript files, the directives begin with <code>//=</code>. In this case, the file is using the <code>require</code> and the <code>require_tree</code> directives. The <code>require</code> directive is used to tell Sprockets the files that you wish to require. Here, you are requiring the files <code>jquery.js</code> and <code>jquery_ujs.js</code> that are available somewhere in the search path for Sprockets. You need not supply the extensions explicitly. Sprockets assumes you are requiring a <code>.js</code> file when done from within a <code>.js</code> file.</p><p><code>require_tree</code> 지시어는 Sprockets에게, 특정 디렉토리에 있는 <em>모든</em> 자바스크립트 파일들을 반복적으로 포함한 후 결과물로 만들어지도록 해 줍니다. 경로명을 지정할 때는 해당 manifest 파일에 대한 상대경로로 지정해야만 합니다. 하부디렉토리에 대한 반복동작을 하지 않고 지정한 디렉토리에 있는 모든 자바스크립트 파일만 포함하고자 할 때는 <code>require_directory</code> 지시어를 사용할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The <code>require_tree</code> directive tells Sprockets to recursively include <em>all</em> JavaScript files in the specified directory into the output. These paths must be specified relative to the manifest file. You can also use the <code>require_directory</code> directive which includes all JavaScript files only in the directory specified, without recursion.</p><p>지시어는 위에서 아래로 처리되지만, <code>requre_tree</code> 지시어가 포함하는 파일들의 순서는 명시되지 않게 됩니다. 따라서 이들사이에 특정 순서에 의존해서는 안된다는 것입니다. 만약 최종적으로 합쳐진 파일내에서 어떤 특정 자바스크립트들이 다른 것들보다 위에 위치해야 할 필요가 있을 경우에는, manifest 파일에서 이 파일들을 먼저 require해야 합니다. 주목할 것은 <code>require</code> 지시어군은 결과물에서 동일한 파일들이 두번 포함되지 않게 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Directives are processed top to bottom, but the order in which files are included by <code>require_tree</code> is unspecified. You should not rely on any particular order among those. If you need to ensure some particular JavaScript ends up above some other in the concatenated file, require the prerequisite file first in the manifest. Note that the family of <code>require</code> directives prevents files from being included twice in the output.</p><p>또한 레일스는 디폴트로 아래의 코드라인을 포함하는 <code>app/assets/stylesheets/application.css</code> 파일을 만들어 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Rails also creates a default <code>app/assets/stylesheets/application.css</code> file which contains these lines:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+/* ...
+*= require_self
+*= require_tree .
+*/
+
+</pre>
+</div>
+<p>자바스크립트 파일에서 작동하는 지시어들은 스타일시트 파일에서도 작동합니다. 이때는 자바스크립트 파일이 아니라 스타일시트 파일이 포함하게 됩니다. CSS manifest 파일에서 <code>require_tree</code> 지시어는 자바스크립트 파일에서와 동일하게 작동하여 현재의 디렉토리에 있는 모든 스타일시트 파일들을 require하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The directives that work in the JavaScript files also work in stylesheets (though obviously including stylesheets rather than JavaScript files). The <code>require_tree</code> directive in a CSS manifest works the same way as the JavaScript one, requiring all stylesheets from the current directory.</p><p>위의 예에서, <code>require_self</code> 지시어가 사용되었습니다. 이 지시어는 <code>require_self</code>가 호출되는 정확한 위치에, 있을 경우, 현재의 파일내에 포함된 CSS를 두게 됩니다. <code>require_self</code> 지시어가 한번 이상 호출된다면 마지막에 호출된 곳에 (현재 파일에 포함된) CSS가 위치하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In this example <code>require_self</code> is used. This puts the CSS contained within the file (if any) at the precise location of the <code>require_self</code> call. If <code>require_self</code> is called more than once, only the last call is respected.</p><div class="note">
+<p> 다수의 Sass 파일을 사용하고자 할 경우에는, Sprockets 지시어를 사용하는 대신, <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#import">Sass <code>@import</code> rule</a>를 일반적으로 사용해야 합니다. Sprockets  지시어를 사용할 경우 모든 Sass 파일들은 각각 자신의 영역내에 존재하게 됩니다. 따라서 변수나 믹신들은 자신들이 정의된 문서내에서만 사용할 수 있게 되는 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">If you want to use multiple Sass files, you should generally use the <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#import">Sass <code>@import</code> rule</a> instead of these Sprockets directives. Using Sprockets directives all Sass files exist within their own scope, making variables or mixins only available within the document they were defined in.</p>
+</div><p>하나 이상의 manifest 파일을 가질 수 있습니다. 예를 들어, <code>admin.css</code>와 <code>admin.js</code> manifest 파일은 어플리케이션의 관리자 부분에서만 사용하기 위한 JS 와 CSS 파일들을 포함하도록 할 수 있을 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You can have as many manifest files as you need. For example the <code>admin.css</code> and <code>admin.js</code> manifest could contain the JS and CSS files that are used for the admin section of an application.</p><p>위에서 언급한 파일들의 require 순서에 대해서도 동일하게 적용됩니다. 특히, 파일들을 하나씩 명시하면 그 순서에 따라 컴파일됩니다. 예를 들어, 아래와 같이 3개의 CSS 파일을 함께 합칠 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The same remarks about ordering made above apply. In particular, you can specify individual files and they are compiled in the order specified. For example, you might concatenate three CSS files together this way:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+/* ...
+*= require reset
+*= require layout
+*= require chrome
+*/
+
+</pre>
+</div>
+<h4 id="사전처리하기-preprocessing-원문·전체">2.5 사전처리하기<span class="original-text-h">(Preprocessing)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>자원에서 사용하는 파일확장자는 어떤 사전처리기를 사용할지를 결정해 줍니다. 디폴트 레일스 젬셋으로 컨트롤러나 scaffold를 생성할 때 일반적인 자바스크립트와 CSS 파일 대신에 CoffeeScript 파일과 SCSS 파일이 생성됩니다. 이전의 예에서는 <code>projects</code>라는 컨트롤러가 있는데, 이것은 <code>app/assets/javascripts/projects.js.coffee</code>와 <code>app/assets/stylesheets/projects.css.scss</code> 파일을 생성했습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The file extensions used on an asset determine what preprocessing is applied. When a controller or a scaffold is generated with the default Rails gemset, a CoffeeScript file and a SCSS file are generated in place of a regular JavaScript and CSS file. The example used before was a controller called "projects", which generated an <code>app/assets/javascripts/projects.js.coffee</code> and an <code>app/assets/stylesheets/projects.css.scss</code> file.</p><p>이들 파일들이 요청될 때, <code>coffee-script</code>와 <code>sass</code> 젬이 제공하는 처리기에 의해서 처리된 후 각각 자바스크립트와 CSS파일로서 브라우져로 보내지게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">When these files are requested, they are processed by the processors provided by the <code>coffee-script</code> and <code>sass</code> gems and then sent back to the browser as JavaScript and CSS respectively.</p><p>이러한 사전처리과정은 다른 파일 확장자를 추가하므로써 추가될 수 있는데, 각각 확장자는의 처리순서는 오른쪽에서 왼쪽 방향입니다. 이러한 확장자는 전처리기를 적용하는 순서대로 사용해야 합니다. 예를 들어, <code>app/assets/stylesheets/projects.css.scss.erb</code> 파일은 제일먼저 ERB로, 이후에 SCSS로 전처리되고, 마지막에 CSS 파일로 제공됩니다. 자바스크립트 파일에 동일하게 적용되어서, <code>app/assets/javascripts/projects.js.coffee.erb</code> 파일은 먼저 ERB로 처리되고 나서 CoffeeScript로 처리된 후 최종적으로는 자바스크립트로 제공됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Additional layers of preprocessing can be requested by adding other extensions, where each extension is processed in a right-to-left manner. These should be used in the order the processing should be applied. For example, a stylesheet called <code>app/assets/stylesheets/projects.css.scss.erb</code> is first processed as ERB, then SCSS, and finally served as CSS. The same applies to a JavaScript file — <code>app/assets/javascripts/projects.js.coffee.erb</code> is processed as ERB, then CoffeeScript, and served as JavaScript.</p><p>기억해 둘 것은, 이러한 사전처리기들의 적용순서라는 것입니다. 예를 들어, <code>app/assets/javascripts/projects.js.erb.coffee</code> 파일을 처리할 때 먼저 CoffeeScript로 처리되어야 하는데, CoffeeScript는 ERB 코드를 알지 못하기 때문에 실행시 문제가 발생하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Keep in mind that the order of these preprocessors is important. For example, if you called your JavaScript file <code>app/assets/javascripts/projects.js.erb.coffee</code> then it would be processed with the CoffeeScript interpreter first, which wouldn't understand ERB and therefore you would run into problems.</p><h3 id="개발환경에서-in-development-원문·전체">3 개발환경에서<span class="original-text-h">(In Development)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h3><p>개발모드에서는 자원들이 manifest 파일에 명시된 순서대로 별도의 파일로서 제공됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In development mode, assets are served as separate files in the order they are specified in the manifest file.</p><p>아래의 <code>app/assets/javascripts/application.js</code> manifest 파일은 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This manifest <code>app/assets/javascripts/application.js</code>:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+//= require core
+//= require projects
+//= require tickets
+
+</pre>
+</div>
+<p>아래의 HTML을 생성해 줄 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">would generate this HTML:</p><div class="code_container">
+<pre class="brush: xml; gutter: false; toolbar: false">
+&lt;script src="/assets/core.js?body=1"&gt;&lt;/script&gt;
+&lt;script src="/assets/projects.js?body=1"&gt;&lt;/script&gt;
+&lt;script src="/assets/tickets.js?body=1"&gt;&lt;/script&gt;
+
+</pre>
+</div>
+<p><code>body</code> 파라메터는 Sprockets에서 필요로하는 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The <code>body</code> param is required by Sprockets.</p><h4 id="디버깅-해제하기-turning-debugging-off-원문·전체">3.1 디버깅 해제하기<span class="original-text-h">(Turning Debugging Off)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p><code>config/environments/development.rb</code> 파일에 아래와 같은 코드라인을 추가해서 업데이트해 주면 디버그 모드를 해제할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You can turn off debug mode by updating <code>config/environments/development.rb</code> to include:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.debug = false
+
+</pre>
+</div>
+<p>이와 같이 디버그 모드가 해제된 상태에서, Sprockets는 모든 파일을 합친 후에 필요한 사전처리기를 실행하게 됩니다. 디버그 모드가 해제되면, 위의 manifest 파일은 대신에 아래와 같이 코드를 생성해 줄 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">When debug mode is off, Sprockets concatenates and runs the necessary preprocessors on all files. With debug mode turned off the manifest above would generate instead:</p><div class="code_container">
+<pre class="brush: xml; gutter: false; toolbar: false">
+&lt;script src="/assets/application.js"&gt;&lt;/script&gt;
+
+</pre>
+</div>
+<p>자원들은 서버가 시작된 후 최초의 요청이 들어올 때 컴파일되고 캐시됩니다. Sprockets는 이어서 들어오는 요청에 대해서 요청 오버헤드를 줄이기 위해서 <code>must-revaludate</code> Cache-Control HTTP 헤더를 설정하게 되는데 이로 인해 브라우저에서는 304 (Not Modified) 응답을 받게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Assets are compiled and cached on the first request after the server is started. Sprockets sets a <code>must-revalidate</code> Cache-Control HTTP header to reduce request overhead on subsequent requests — on these the browser gets a 304 (Not Modified) response.</p><p>요청 중간에 manifest 파일내에 포함되는 파일 중에 하나가 변경될 경우에, 서버는 새로 컴파일된 파일을 제공하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If any of the files in the manifest have changed between requests, the server responds with a new compiled file.</p><p>디버그 모드는 레일스 헬퍼메소드를 이용하여 설정할 수도 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Debug mode can also be enabled in the Rails helper methods:</p><div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;%= stylesheet_link_tag "application", debug: true %&gt;
+&lt;%= javascript_include_tag "application", debug: true %&gt;
+
+</pre>
+</div>
+<p><code>:debug</code> 옵션은 디버그 모드가 설정된 상태에서는 불필요하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The <code>:debug</code> option is redundant if debug mode is on.</p><p>의도한 바대로 작동하는지를 확인하기 위해 개발모드에서도 자원을 압축해 볼 수 있고 디버그 목적으로 필요시에 압축을 해제할 수도 있을 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You could potentially also enable compression in development mode as a sanity check, and disable it on-demand as required for debugging.</p><h3 id="운영환경에서-in-production-원문·전체">4 운영환경에서<span class="original-text-h">(In Production)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h3><p>운영환경에서 레일스는 위에서 설명한 바와 같이 fingerprinting 기법을 사용합니다. 디폴트로, 레일스는 자원들이 사전 컴파일되었고 웹서버가 static 자원으로 제공할 것이라고 가정합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In the production environment Rails uses the fingerprinting scheme outlined above. By default Rails assumes that assets have been precompiled and will be served as static assets by your web server.</p><p>사전컴파일 단계에서 컴파일된 파일의 내용에 근거해서 MD5 해시값이 생성되고 디스크에 기록될 때 파일명에 삽입됩니다. 레일스는 이와 같이 fingerprinting된 파일명을 manifest 이름 대신 사용하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">During the precompilation phase an MD5 is generated from the contents of the compiled files, and inserted into the filenames as they are written to disc. These fingerprinted names are used by the Rails helpers in place of the manifest name.</p><p>예를 들어 아래의 코드라인은, <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">For example this:</p><div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+&lt;%= javascript_include_tag "application" %&gt;
+&lt;%= stylesheet_link_tag "application" %&gt;
+
+</pre>
+</div>
+<p>다음과 같은 HTML 태크를 생성합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">generates something like this:</p><div class="code_container">
+<pre class="brush: xml; gutter: false; toolbar: false">
+&lt;script src="/assets/application-908e25f4bf641868d8683022a5b62f54.js"&gt;&lt;/script&gt;
+&lt;link href="/assets/application-4dd5b109ee3439da54f5bdfd78a80473.css" media="screen" rel="stylesheet" /&gt;
+
+</pre>
+</div>
+<p>Note: asset pipeline을 사용하면, 더 이상 :cache와 :concat 옵션을 사용할 필요가 없기 때문에, <code>javascript_include_tag</code>와 <code>stylesheet_link_tag</code>에서 이들 옵션을 제거해야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">with the Asset Pipeline the :cache and :concat options aren't used anymore, delete these options from the <code>javascript_include_tag</code> and <code>stylesheet_link_tag</code>.</p><p>fingerprinting 기능은 <code>config.assets.digest</code> 설정으로 제어할 수 있습니다. 이 설정 항목은 운영환경에서 디폴트로 <code>true</code> 값을, 기타 다른 환경에서는 <code>false</code> 값을 가집니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The fingerprinting behavior is controlled by the setting of <code>config.assets.digest</code> setting in Rails (which defaults to <code>true</code> for production and <code>false</code> for everything else).</p><div class="note">
+<p> 일반적인 환경에서는 디폴트 옵션을 변경해서는 안됩니다. 파일명에 해시값이 없고 far-future 헤더가 설정되면, 원격 클라이언트가 파일내용이 변경되었음에도 불구하고 해당 파일을 다시 불러오지 못하게 될 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">Under normal circumstances the default option should not be changed. If there are no digests in the filenames, and far-future headers are set, remote clients will never know to refetch the files when their content changes.</p>
+</div><h4 id="자원-사전컴파일하기-precompiling-assets-원문·전체">4.1 자원 사전컴파일하기<span class="original-text-h">(Precompiling Assets)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>pipeline상에 있는 자원 manifest 파일가 기타 다른 파일들을 컴파일해서 디스크로 저장하도록 해 주는 rake 작업이 레일스에 번들로 내장되어 배포됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Rails comes bundled with a rake task to compile the asset manifests and other files in the pipeline to the disk.</p><p>컴파일된 자원들은 <code>config.assets.prefix</code>에 명시된 위치로 저장되는데, 디폴트로 <code>public/assets</code> 디렉토리가 해당됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Compiled assets are written to the location specified in <code>config.assets.prefix</code>. By default, this is the <code>public/assets</code> directory.</p><p>배포 중에 서버상에서 이 작업을 수행하여 컴파일 버전의 자원들을 서버상에 직접 생성할 수 있습니다. 로컬머신에서 컴파일하는 것에 대한 정보는 다음 섹션을 보기 바랍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You can call this task on the server during deployment to create compiled versions of your assets directly on the server. See the next section for information on compiling locally.</p><p>rake 작업은 다음과 같습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The rake task is:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ RAILS_ENV=production bundle exec rake assets:precompile
+
+</pre>
+</div>
+<p>보다 신속하게 자원을 사전컴파일하기 위해서, <code>config/application.rb</code> 파일에 있는 <code>config.assets.initialize_on_precompile</code>을 false 값으로 설정할 경우, 어플리케이션을 일부분만 로드할 수 있습니다. 그러나 이런 경우에는 템플릿 파일들이 어플리케이션내 객체나 메소드를 인식할 수 없게 됩니다. <strong>Heroku 경우 이 값을 false로 지정해야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></strong></p><p class="original-text">For faster asset precompiles, you can partially load your application by setting <code>config.assets.initialize_on_precompile</code> to false in <code>config/application.rb</code>, though in that case templates cannot see application objects or methods. **Heroku requires this to be false.</p><div class="warning">
+<p> <code>config.assets.initialize_on_precompile</code> 값을 false 로 설정할 경우, 배포전에 로컬머신에서 <code>rake assets:precompile</code> 명령으로 확인해 둘 필요가 있습니다. 이 값을 설정하더라도 자원들을 여전히 개발환경의 영역에 있기 때문에, 자원이 어플리케이션 객체나 메소드를 참조할 때 버그가 나타날 수 있습니다. 이 값을 변경할 때 엔진에도 영향을 미치게 됩니다. 엔진은 또한 사전컴파일을 위해서 자원을 정의하기도 합니다. 전체 어플리케이션 환경이 로드되기 않으므로 인해, 엔진이나 다른 젬들도 로드되지 않을 수 있습니다. 따라서 이러한 이유로 자원이 누락되게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">If you set <code>config.assets.initialize_on_precompile</code> to false, be sure to test <code>rake assets:precompile</code> locally before deploying. It may expose bugs where your assets reference application objects or methods, since those are still in scope in development mode regardless of the value of this flag. Changing this flag also affects engines. Engines can define assets for precompilation as well. Since the complete environment is not loaded, engines (or other gems) will not be loaded, which can cause missing assets.</p>
+</div><p>Capistrano(v2.15.1 부터)에는 배포시 이러한 문제점을 처리하기 위한 레시피를 제공해 줍니다. 아래와 같은 코드라인을 <code>Capfile</code> 추가해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Capistrano (v2.15.1 and above) includes a recipe to handle this in deployment. Add the following line to <code>Capfile</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+load 'deploy/assets'
+
+</pre>
+</div>
+<p>이것은 <code>config.assets.prefix</code>에 평시된 폴더를 서버상의 <code>shared/assets</code> 디렉토리로 연결해 줍니다. 이미 이 공유 폴더를 사용하고 있다면 별도의 배포 작업을 작성할 필요가 있을 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This links the folder specified in <code>config.assets.prefix</code> to <code>shared/assets</code>. If you already use this shared folder you'll need to write your own deployment task.</p><p>중요한 것은, 이 폴더는 배포 버전마다 공유되기 때문에 이전 컴파일 버전의 자원을 참조하는 원격상의 캐시된 페이지들이 수명기간 동안 이전 자원을 참조할 수 있게 된다는 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">It is important that this folder is shared between deployments so that remotely cached pages that reference the old compiled assets still work for the life of the cached page.</p><div class="note">
+<p> 로컬머신에서 자원을 사전컴파일할 경우, Gemfile상의 assets 그룹에 명시된 젬들이 설치되는 것을 피하기 위해 서버 상에서 <code>bundle install --without assets</code> 명령을 사용할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">If you are precompiling your assets locally, you can use <code>bundle install --without assets</code> on the server to avoid installing the assets gems (the gems in the assets group in the Gemfile).</p>
+</div><p>컴파일하는 파일들에 대한 디폴트 매치 정규식은 <code>application.js</code>, <code>application.css</code>, 그리고 모든 non-JS/CSS 파일들을 포함하고 모든 이미지 자원들도 자동으로 포함하게 될 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The default matcher for compiling files includes <code>application.js</code>, <code>application.css</code> and all non-JS/CSS files (this will include all image assets automatically):</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+[ Proc.new { |path| !%w(.js .css).include?(File.extname(path)) }, /application.(css|js)$/ ]
+
+</pre>
+</div>
+<div class="note">
+<p> 매치 정규식에 포함되는 파일들(과 아래에 있는 precompile 배열의 다른 멤버들)이 최종 컴파일 파일 이름에 적용됩니다. 즉, static JS/CSS 파일뿐만 아니라 JS/CSS로 컴파일되는 모든 파일은 제외된다는 것입니다. 예를 들면, <code>.coffee</code>와 <code>.scss</code> 파일들은 JS/CSS 파일로 컴파일될 때 자동으로 포함되지 <strong>않는다</strong> 는 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">The matcher (and other members of the precompile array; see below) is applied to final compiled file names. This means that anything that compiles to JS/CSS is excluded, as well as raw JS/CSS files; for example, <code>.coffee</code> and <code>.scss</code> files are <strong>not</strong> automatically included as they compile to JS/CSS.</p>
+</div><p>다른 manifest 파일들이나 개별 스타일시트와 자바스크립트 파일들을 포함고자할 경우에는, <code>config/application.rb</code> 파일내의 <code>precompile</code> 배열에 이들을 추가해 줄 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you have other manifests or individual stylesheets and JavaScript files to include, you can add them to the <code>precompile</code> array in <code>config/application.rb</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.precompile += ['admin.js', 'admin.css', 'swfObject.js']
+
+</pre>
+</div>
+<p>또는 다음과 같이 모든 자원을 사전컴파일하도록 할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Or you can opt to precompile all assets with something like this:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# config/application.rb
+config.assets.precompile &lt;&lt; Proc.new do |path|
+  if path =~ /\.(css|js)\z/
+    full_path = Rails.application.assets.resolve(path).to_path
+    app_assets_path = Rails.root.join('app', 'assets').to_path
+    if full_path.starts_with? app_assets_path
+      puts "including asset: " + full_path
+      true
+    else
+      puts "excluding asset: " + full_path
+      false
+    end
+  else
+    false
+  end
+end
+
+</pre>
+</div>
+<div class="note">
+<p> precompile 배열에 Sass 또는 CoffeeScript 파일을 추가할 경우에도, 컴파일하여 만들어지는 파일명이 js 또는 css로 끝나도록 반드시 명시해 주어야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">Always specify an expected compiled filename that ends with js or css, even if you want to add Sass or CoffeeScript files to the precompile array.</p>
+</div><p>또한 rake 작업은 모든 자원과 각각의 fingerprint 버전에 대한 목록을 포함하는 <code>manifest.yml</code> 파일을 생성하게 됩니다. 레일스 헬퍼메소드는 이 파일을 이용하여 외부로 들어오는 매칭 요청을 Sprockets로 넘기지 못하게 합니다. 전형적인 manifest 파일은 다음과 같은 모습을 하게 가지게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The rake task also generates a <code>manifest.yml</code> that contains a list with all your assets and their respective fingerprints. This is used by the Rails helper methods to avoid handing the mapping requests back to Sprockets. A typical manifest file looks like:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+---
+rails.png: rails-bd9ad5a560b5a3a7be0808c5cd76a798.png
+jquery-ui.min.js: jquery-ui-7e33882a28fc84ad0e0e47e46cbf901c.min.js
+jquery.min.js: jquery-8a50feed8d29566738ad005e19fe1c2d.min.js
+application.js: application-3fdab497b8fb70d20cfc5495239dfc29.js
+application.css: application-8af74128f904600e41a6e39241464e03.css
+
+</pre>
+</div>
+<p>이 manifest 파일의 디폴트 위치는 <code>config.assets.prefix</code>에 명시된 위치의 루트입니다. 디폴트로 이 값은 <code>/assets</code> 입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The default location for the manifest is the root of the location specified in <code>config.assets.prefix</code> ('/assets' by default).</p><div class="note">
+<p> 운영환경에서 사전컴파일된 파일이 없는 경우에, 해당 파일명을 알려주는 <code>Sprockets::Helpers::RailsHelper::AssetPaths::AssetNotPrecompiledError</code> 예외가 발생하게 될 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">If there are missing precompiled files in production you will get an <code>Sprockets::Helpers::RailsHelper::AssetPaths::AssetNotPrecompiledError</code> exception indicating the name of the missing file(s).</p>
+</div><h5 id="far-future-expires-header">4.1.1 Far-future Expires Header</h5><p>사전컴파일된 자원들은 파일시스템에 존재하게 되며, 웹서버가 직접 제공하게 됩니다. 이 파일들은 디폴트로 far-future 헤더를 가지지 않으며, 따라서 fingerprinting 기능을 시작하기 위해서는 서버 설정을 업데이트해서 추가해 주어야 할 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Precompiled assets exist on the filesystem and are served directly by your web server. They do not have far-future headers by default, so to get the benefit of fingerprinting you'll have to update your server configuration to add them.</p><p>아파치 서버용 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">For Apache:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+# The Expires* directives requires the Apache module `mod_expires` to be enabled.
+&lt;Location /assets/&gt;
+  # Use of ETag is discouraged when Last-Modified is present
+  Header unset ETag
+  FileETag None
+  # RFC says only cache for 1 year
+  ExpiresActive On
+  ExpiresDefault "access plus 1 year"
+&lt;/Location&gt;
+
+</pre>
+</div>
+<p>Nginx 서버용 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">For nginx:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+location ~ ^/assets/ {
+  expires 1y;
+  add_header Cache-Control public;
+
+  add_header ETag "";
+  break;
+}
+
+</pre>
+</div>
+<h5 id="gzip-압축-gzip-compression-원문·전체">4.1.2 GZip 압축<span class="original-text-h">(GZip Compression)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h5><p>자원 파일들이 사전컴파일될 때, Sprockets는 자원에 대한 <a href="http://en.wikipedia.org/wiki/Gzip">gzipped</a>(.gz) 버전도 생성합니다. 웹서버는 대개 절충안으로 중등도 정도의 압축율을 사용하도록 설정되어 있지만, 일단 사전컴파일이 일어나면, Sprockets는 최대의 압축율을 사용해서 데이터 전송크기를 최소한으로 줄이게 됩니다. 한편, 웹서버가 압축되지 않은 파일들을 압축하여 사용하기 보다는 디스크에 저장된 상태에서 직접 압축된 내용을 제공할 수 있도록 할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">When files are precompiled, Sprockets also creates a <a href="http://en.wikipedia.org/wiki/Gzip">gzipped</a> (.gz) version of your assets. Web servers are typically configured to use a moderate compression ratio as a compromise, but since precompilation happens once, Sprockets uses the maximum compression ratio, thus reducing the size of the data transfer to the minimum. On the other hand, web servers can be configured to serve compressed content directly from disk, rather than deflating non-compressed files themselves.</p><p>Nginx 서버의 경우는 <code>gzip_static</code> 옵션을 설정하여 자동으로 이러한 일을 할 수 있도록 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Nginx is able to do this automatically enabling <code>gzip_static</code>:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+location ~ ^/(assets)/  {
+  root /path/to/public;
+  gzip_static on; # to serve pre-gzipped version
+  expires max;
+  add_header Cache-Control public;
+}
+
+</pre>
+</div>
+<p>이 지시어는 이러한 기능을 제공하는 코어 모듈이 Nginx 웹서버에 컴파일되어 있을 때 사용할 수 있습니다. 우분투 패키지들, 심지어 <code>nginx-light</code>의 경우도 이 모듈이 컴파일되어 있습니다. 다른 방법으로는 직접 수작업으로 컴파일 작업을 해야할 필요가 있을 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This directive is available if the core module that provides this feature was compiled with the web server. Ubuntu packages, even <code>nginx-light</code> have the module compiled. Otherwise, you may need to perform a manual compilation:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+./configure --with-http_gzip_static_module
+
+</pre>
+</div>
+<p>Phusion Passenger와 함께 nginx 서버를 컴파일할 경우에는 이 옵션에 대한 프롬프트가 나타날 때 그냥 넘어가야할 필요가 있을 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you're compiling nginx with Phusion Passenger you'll need to pass that option when prompted.</p><p>아파치 서버에 대한 확실한 설정도 가능하지만 약간의 트릭이 필요하기 때문에 구글검색을 해 보기 바랍니다. (또는 이에 대한 좋은 설정 예가 있다면 이 가이드를 업데이트하는데 도움을 주기 바랍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">A robust configuration for Apache is possible but tricky; please Google around. (Or help update this Guide if you have a good example configuration for Apache.)</p><h4 id="로컬머신에서-사전컴파일-작업-local-precompilation-원문·전체">4.2 로컬머신에서 사전컴파일 작업<span class="original-text-h">(Local Precompilation)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>로컬머신에서 사전컴파일 작업을 해야하는 몇가지 이유가 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">There are several reasons why you might want to precompile your assets locally. Among them are:</p>
+<ul>
+<li>
+<p>운영서버 파일시스템에 대한 쓰기권한이 없을 경우 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">You may not have write access to your production file system.</p>
+</li>
+<li>
+<p>한대 이상의 서버에 배포를 해야할 경우, 중복된 작업을 피하기 위해서 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">You may be deploying to more than one server, and want to avoid the duplication of work.</p>
+</li>
+<li>
+<p>자원에 대한 변경작업이 없는 배포작업을 자주해야할 경우 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">You may be doing frequent deploys that do not include asset changes.</p>
+</li>
+</ul>
+<p>로컬머신에서의 컴파일작업으로 컴파일된 파일들을 소스 컨트롤에 추가해서 정상적인 방법으로 배포할 수 있게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Local compilation allows you to commit the compiled files into source control, and deploy as normal.</p><p>그러나 주의해야 할 사항이 두가지 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">There are two caveats:</p>
+<ul>
+<li>
+<p>자원을 사전컴파일하는 Capistrano 배포작업을 실행해서는 안됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">You must not run the Capistrano deployment task that precompiles assets.</p>
+</li>
+<li>
+<p>아래의 두가지 어플리케이션 설정내용을 변경해야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">You must change the following two application configuration settings.</p>
+</li>
+</ul>
+<p><code>config/environments/development.rb</code> 파일에 아래의 코드라인을 추가합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In <code>config/environments/development.rb</code>, place the following line:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.prefix = "/dev-assets"
+
+</pre>
+</div>
+<p>또한, <code>application.rb</code> 파일에서는 아래의 코드라인을 추가해 줄 필요가 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You will also need this in application.rb:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.initialize_on_precompile = false
+
+</pre>
+</div>
+<p><code>prefix</code>를 변경하면 개발모드에서 자원을 해당 주소로 연결하여, 모든 요청을 Sprockets로 보내 줍니다. 그러나 운영환경에서는 <code>prefix</code>가 여전히 <code>/assets</code>로 설정됩니다. 이와 같이 <code>prefix</code>를 변경하지 않으면, 어플리케이션은 개발모드에서 <code>public/assets</code>로부터 사전컴파일된 자원들을 제공하게 되고 재차 자원을 컴파일해야만 로컬에서 변경한 내용들이 반영될 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The <code>prefix</code> change makes Rails use a different URL for serving assets in development mode, and pass all requests to Sprockets. The prefix is still set to <code>/assets</code> in the production environment. Without this change, the application would serve the precompiled assets from <code>public/assets</code> in development, and you would not see any local changes until you compile assets again.</p><p><code>initialize_on_precompile</code> 설정을 변경하게 되면 레일스를 호출하지 않은 상태에서 사전컴파일 작업을 수행하도록 해 줍니다. 이것은 사전컴파일 작업이 운영모드에서는 디폴트로 수행되기 때문이며, 명시된 운영서버의 데이터베이스에 연결을 시도할 것입니다. 이 옵션을 설정한 상태에서 로컬머신에서 컴파일작업을 수행할 때 pipeline 파일에서 데이터베이스와 같은 레일스 리소스에 의존하는 코드를 작성할 수 없다는 것에 주의하기 바랍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The <code>initialize_on_precompile</code> change tells the precompile task to run without invoking Rails. This is because the precompile task runs in production mode by default, and will attempt to connect to your specified production database. Please note that you cannot have code in pipeline files that relies on Rails resources (such as the database) when compiling locally with this option.</p><p>또한 모든 압축엔진과 최소화엔진들이 개발시스템에서 사용할 수 있는지를 확인해 둘 필요가 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You will also need to ensure that any compressors or minifiers are available on your development system.</p><p>실제 작업시에, 이렇게 함으로써 로컬머신에서 사전컴파일 작업을 수행하여 작업 중인 디렉토리 구조에 파일을 저장하고 필요시에 소스관리 툴에 커밋을 할 수 있게 됩니다. 이와 같은 상황에서도 개발모드는 제대로 동작할 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In practice, this will allow you to precompile locally, have those files in your working tree, and commit those files to source control when needed. Development mode will work as expected.</p><h4 id="실시간-컴파일-작업-live-compilation-원문·전체">4.3 실시간 컴파일 작업<span class="original-text-h">(Live Compilation)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>어떤 상황에서는, 실시간 컴파일작업을 하기를 원할 때가 있습니다. 이런 모드에서는 pipeline상의 자원에 대한 모든 요청을 Sprockets가 직접 처리하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In some circumstances you may wish to use live compilation. In this mode all requests for assets in the pipeline are handled by Sprockets directly.</p><p>이 옵션을 사용하기 위해서는 아래와 같이 설정해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">To enable this option set:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.compile = true
+
+</pre>
+</div>
+<p>최초의 요청시에, 위에서 개발모드에서 언급한 바와 같이 자원들이 컴파일되고 캐시되며, 헬퍼메소드에서 사용되는 manifest 이름들은 MD5 해시값이 포함되도록 변경됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">On the first request the assets are compiled and cached as outlined in development above, and the manifest names used in the helpers are altered to include the MD5 hash.</p><p>또한 Sprockets는 <code>Cache-Control</code> HTTP 헤더를 <code>max-age=31536000</code>으로 설정합니다. 이것은 서버와 클라이언트 브라우저사이에 있는 모든 캐시에 대해서 제공되는 자원파일이 1년동안 캐시될 수 있다고 알려주게 됩니다. 이것은 서버로부터 이 자원에 대한 요청수를 줄이는 효과를 가져옵니다. 즉, 해당 자원이 로컬 브라운져상의 캐시나 어떤 중간 레이어의 캐시 상에 존재할 수 있도록 해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Sprockets also sets the <code>Cache-Control</code> HTTP header to <code>max-age=31536000</code>. This signals all caches between your server and the client browser that this content (the file served) can be cached for 1 year. The effect of this is to reduce the number of requests for this asset from your server; the asset has a good chance of being in the local browser cache or some intermediate cache.</p><p>이러한 모드는 더 많은 메모리를 사용하게 되고 디폴트 상태보다 퍼포먼스가 좋지 않기 때문에 추천되지는 않습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This mode uses more memory, performs more poorly than the default and is not recommended.</p><p>기존의 자바스크립트 런타임이 없는 서버 시스템에 운영용 어플리케이션을 배포할 경우에는, 아래와 같이 Gemfile에 젬을 하나 추가해 주어야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you are deploying a production application to a system without any pre-existing JavaScript runtimes, you may want to add one to your Gemfile:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+group :production do
+  gem 'therubyracer'
+end
+
+</pre>
+</div>
+<h4 id="cdns">4.4 CDNs</h4><p>자원이 CDN으로부터 제공될 때는, 영구적으로 캐시에 의존하지 않다는 것을 확인해야 합니다. 의존할 경우 문제를 야기할 수 있습니다. <code>config.action_controller.perform_caching = true</code>로 설정할 경우, Rack::Cache는 <code>Rails.cache</code>를 이용해서 자원들을 저장할 것입니다. 이것은 캐시가 빠른 속도로 가득차게 만들 수 있습니다. [[[If your assets are being served by a CDN, ensure they don't stick around in your cache forever. This can cause problems. If you use 
+<code>config.action_controller.perform_caching = true</code>, Rack::Cache will use
+<code>Rails.cache</code> to store assets. This can cause your cache to fill up quickly.]]]</p><p>모든 캐시는 상이하기 때문에, CDN이 캐싱작업을 다루는 방법을 알아야 하며 pipeline과 함께 제대로 동작하는 것을 확인해 두어야 합니다. 특별한 설정을 할 경우 이와 관련된 이상한 현상을 발견할 수도 있습니다. 예를 들어, HTTP 캐시로 디폴트 상태의 nginx를 사용할 경우는 특별한 문제가 발생하지 않게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Every cache is different, so evaluate how your CDN handles caching and make sure that it plays nicely with the pipeline. You may find quirks related to your specific set up, you may not. The defaults nginx uses, for example, should give you no problems when used as an HTTP cache.</p><h3 id="pipeline-옵션변경하기-customizing-the-pipeline-원문·전체">5 Pipeline 옵션변경하기<span class="original-text-h">(Customizing the Pipeline)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h3><h4 id="css-압축-css-compression-원문·전체">5.1 CSS 압축<span class="original-text-h">(CSS Compression)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>현재로써 CSS를 압축하기 위한 옵션으로 한가지가 있는데 YUI 라는 것입니다. <a href="http://developer.yahoo.com/yui/compressor/css.html">YUI CSS compressor</a>는 최소화 작업을 제공해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">There is currently one option for compressing CSS, YUI. The <a href="http://developer.yahoo.com/yui/compressor/css.html">YUI CSS compressor</a> provides minification.</p><p>아래의 코드라인은 YUI 압축을 사용할 수 있게 해 주며 <code>yui-compression</code> 젬을 설치해 주어야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The following line enables YUI compression, and requires the <code>yui-compressor</code> gem.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.css_compressor = :yui
+
+</pre>
+</div>
+<p>이 때 <code>config.assets.compress</code>를 <code>true</code>로 설정해 주어야 CSS 압축을 사용할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The <code>config.assets.compress</code> must be set to <code>true</code> to enable CSS compression.</p><h4 id="자바스크립트-압축-javascript-compression-원문·전체">5.2 자바스크립트 압축<span class="original-text-h">(JavaScript Compression)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>자바스크립트 압축시 가능한 옵션으로는 <code>:closure</code>, <code>:uglifier</code>, <code>:yui</code> 가 있습니다. 사용하기 위해서는 각각에 대한 <code>closure-compiler</code>, <code>uglifier</code>, yui-compressor<code>젬을 설치해야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></code></p><p class="original-text">Possible options for JavaScript compression are:closure<code>,</code>:uglifier<code>and</code>:yui<code>. These require the use of the</code>closure-compiler<code>,</code>uglifier<code>or</code>yui-compressor` gems, respectively.</p><p>디폴트 Gemfile은 <a href="https://github.com/lautis/uglifier">uglifier</a>을 포함하고 있습니다. 이 젬은 <a href="https://github.com/mishoo/UglifyJS">UglifierJS</a>(NodeJS용으로 작성됨)를 루비에서 사용할 수 있도록 한 것입니다. 이 젬은 공백을 제거하여 압축합니다. 또한 <code>if</code>와 <code>else</code> 문을 가능한한 ternary 연산자(<code>? :</code>)로 변경하는 등과 같은 최적화 작업도 수행하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The default Gemfile includes <a href="https://github.com/lautis/uglifier">uglifier</a>. This gem wraps <a href="https://github.com/mishoo/UglifyJS">UglifierJS</a> (written for NodeJS) in Ruby. It compresses your code by removing white space. It also includes other optimizations such as changing your <code>if</code> and <code>else</code> statements to ternary operators where possible.</p><p>아래의 코드라인은 자바스크립트 압축을 위해 <code>uglifier</code>를 호출하게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The following line invokes <code>uglifier</code> for JavaScript compression.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.js_compressor = :uglifier
+
+</pre>
+</div>
+<p>주의할 것은 자바스크립트 압축을 위해서는 <code>config.assets.compress</code>를 <code>true</code>값으로 지정해 주어야 한다는 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Note that <code>config.assets.compress</code> must be set to <code>true</code> to enable JavaScript compression</p><div class="note">
+<p> <code>uglifier</code>를 사용하기 위해서 <a href="https://github.com/sstephenson/execjs#readme">ExecJS</a>를 지원하는 런타임 모듈이 필요할 것입니다. Mac OS X 또는 윈도우 운영체제를 사용할 경우에는 이미 자바스크립트 런타임이 설치되어 있기 때문에 추가 작업이 필요없습니다. 모든 지원가능한 자바스크립트 런타임에 대한 정보를 원할 경우 <a href="https://github.com/sstephenson/execjs#readme">ExecJS</a> 문서를 확인해 보기 바랍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">You will need an <a href="https://github.com/sstephenson/execjs#readme">ExecJS</a> supported runtime in order to use <code>uglifier</code>. If you are using Mac OS X or Windows you have a JavaScript runtime installed in your operating system. Check the <a href="https://github.com/sstephenson/execjs#readme">ExecJS</a> documentation for information on all of the supported JavaScript runtimes.</p>
+</div><h4 id="자신이-제작한-압축기-사용하기-using-your-own-compressor-원문·전체">5.3 자신이 제작한 압축기 사용하기<span class="original-text-h">(Using Your Own Compressor)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>CSS와 자바스크립트에 대한 압축기 config 셋팅에는 모든 객체를 지정할 수 있습니다. 단, 이 객체는 반드시 하나의 문자열 인수를 취해서 결과로 문자열을 반환하는 <code>compress</code> 메소드를 가지고 있어야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The compressor config settings for CSS and JavaScript also take any object. This object must have a <code>compress</code> method that takes a string as the sole argument and it must return a string.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Transformer
+  def compress(string)
+    do_something_returning_a_string(string)
+  end
+end
+
+</pre>
+</div>
+<p>이를 위해서, <code>application.rb</code> 파일에서 config 옵션에 새로운 객체를 넘겨 주어야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">To enable this, pass a new object to the config option in <code>application.rb</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.css_compressor = Transformer.new
+
+</pre>
+</div>
+<h4 id="자원-경로-변경하기-changing-the-assets-path-원문·전체">5.4 자원 경로 변경하기<span class="original-text-h">(Changing the <em>assets</em> Path)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>Sprockets가 디폴트로 사용하는 공개 경로는 <code>/assets</code> 입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The public path that Sprockets uses by default is <code>/assets</code>.</p><p>아래와 같이 이 값을 다른 것으로 변경할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This can be changed to something else:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.prefix = "/some_other_path"
+
+</pre>
+</div>
+<p>이것은 asset pipeline을 사용하지 않았던 이전 버전의 프로젝트를 업데이트할 때와 이미 이 경로를 사용하고 있는 경우 또는, 새로운 리소스에 대해 이 경로를 사용하고자 할 때 편리하게 사용할 수 있는 옵션입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This is a handy option if you are updating an older project that didn't use the asset pipeline and that already uses this path or you wish to use this path for a new resource.</p><h4 id="x-sendfile-헤더-x-sendfile-headers-원문·전체">5.5 X-Sendfile 헤더<span class="original-text-h">(X-Sendfile Headers)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>X-Sendfile 헤더는 하나의 지시어로써 웹서버가 어플리케이션으로부터 오는 응답을 무시하고 대신에 디스크에 저장되어 있는 특정 파일을 제공할 수 있도록 해 줍니다. 이 옵션은 디폴트로 off 상태이지만, 서버가 해당 기능을 지원하는 경우 사용가능할 수 있습니다. 이와 같이 사용가능한 상태로 한 경우에는, 해당 파일을 제공하는 책임을 웹서버로 넘길 수 있어 보다 빠른 방법이 될 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The X-Sendfile header is a directive to the web server to ignore the response from the application, and instead serve a specified file from disk. This option is off by default, but can be enabled if your server supports it. When enabled, this passes responsibility for serving the file to the web server, which is faster.</p><p>아파치와 nginx 웹서버는 이 옵션을 지원합니다. 아래와 같이 <code>config/environments/production.rb</code> 파일에서 설정해 주면 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Apache and nginx support this option, which can be enabled in <code>config/environments/production.rb</code>.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
+# config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+
+</pre>
+</div>
+<div class="warning">
+<p> 기존의 어플리케이션을 업데이트하여 이 옵션을 사용하고자 한다면, <code>production.rb</code> 파일과 <code>application.rb</code>가 아닌 운영 속성을 가지는 다른 환경에만 이 설정 옵션을 조심스럽게 붙여넣기 해야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">If you are upgrading an existing application and intend to use this option, take care to paste this configuration option only into <code>production.rb</code> and any other environments you define with production behavior (not <code>application.rb</code>).</p>
+</div><h3 id="자원-캐시-저장소-assets-cache-store-원문·전체">6 자원 캐시 저장소<span class="original-text-h">(Assets Cache Store)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h3><p>디폴트 레일스 캐시 저장소는 개발과 운영환경에서 Sprockets가 자원을 캐시하기 위해서 사용하는 곳입니다. 이 장소는 <code>config.assets.cache_store</code> 설정을 변경하여 다른 것으로 바꿀 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The default Rails cache store will be used by Sprockets to cache assets in development and production. This can be changed by setting <code>config.assets.cache_store</code>.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.cache_store = :memory_store
+
+</pre>
+</div>
+<p>자원 캐시 저장소에 지정할 수 있는 옵션은 어플리케이션의 캐시 저장소와 동일합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The options accepted by the assets cache store are the same as the application's cache store.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.assets.cache_store = :memory_store, { size: 32.megabytes }
+
+</pre>
+</div>
+<h3 id="자원을-젬에-추가하기-adding-assets-to-your-gems-원문·전체">7 자원을 젬에 추가하기<span class="original-text-h">(Adding Assets to Your Gems)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h3><p>자원들을 젬의 형태로 외부 리소스로부터 가져 올 수도 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Assets can also come from external sources in the form of gems.</p><p>이에 대한 좋은 예가 바로 <code>jquery-rails</code> 젬인데 이것은 표준 자바스크립트 라이브러리 젬로써 레일스와 함께 내장되어 배포됩니다. 이 젬은 엔진 클래스를 포함하는데, 이것은 <code>Rails::Engine</code>으로부터 상속을 받게 됩니다. 따라서 이 젬에서 사용하는 디렉토리가 자원을 포함할 수 있고 이 엔진의 <code>app/assets</code>, <code>lib/assets</code>, <code>vendor/assets</code> 디렉토리가 Sprockets의 검색경로에 추가된다고 레일스에게 알려주게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">A good example of this is the <code>jquery-rails</code> gem which comes with Rails as the standard JavaScript library gem. This gem contains an engine class which inherits from <code>Rails::Engine</code>. By doing this, Rails is informed that the directory for this gem may contain assets and the <code>app/assets</code>, <code>lib/assets</code> and <code>vendor/assets</code> directories of this engine are added to the search path of Sprockets.</p><h3 id="라이브러리-또는-젬을-사전-처리기로-만들기-making-your-library-or-gem-a-pre-processor-원문·전체">8 라이브러리 또는 젬을 사전 처리기로 만들기<span class="original-text-h">(Making Your Library or Gem a Pre-Processor)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h3><p>Sprockets는 다른 템플릿 작성 엔진에 대한 통상적인 인터페이스로 <a href="https://github.com/rtomayko/tilt">Tilt</a>를 사용합니다. 보통, <code>Tilt::Template</code>을 상속한 후 <code>evaluate</code> 메소드를 재정의하여 최종 결과물을 반환하게 될 것입니다. 템플릿 소스는 <code>@code</code>에 저장됩니다. 더 많은 것을 알기 위해서 <a href="https://github.com/rtomayko/tilt/blob/master/lib/tilt/template.rb"><code>Tilt::Template</code></a> 소스들을 살펴보기 바랍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">As Sprockets uses <a href="https://github.com/rtomayko/tilt">Tilt</a> as a generic interface to different templating engines, your gem should just implement the Tilt template protocol. Normally, you would subclass <code>Tilt::Template</code> and reimplement <code>evaluate</code> method to return final output. Template source is stored at <code>@code</code>. Have a look at <a href="https://github.com/rtomayko/tilt/blob/master/lib/tilt/template.rb"><code>Tilt::Template</code></a> sources to learn more.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+module BangBang
+  class Template &lt; ::Tilt::Template
+    # Adds a "!" to original template.
+    def evaluate(scope, locals, &amp;block)
+      "#{@code}!"
+    end
+  end
+end
+
+</pre>
+</div>
+<p>이제 이 <code>Template</code> 클래스를 템플릿 파일에 대한 확장자와 연결을 시켜줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Now that you have a <code>Template</code> class, it's time to associate it with an extension for template files:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+Sprockets.register_engine '.bang', BangBang::Template
+
+</pre>
+</div>
+<h3 id="이전-버전의-레일스로부터-업그레이드하기-upgrading-from-old-versions-of-rails-원문·전체">9 이전 버전의 레일스로부터 업그레이드하기<span class="original-text-h">(Upgrading from Old Versions of Rails)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h3><p>업그레이드할 때 약간의 문제가 발생합니다. 우선 <code>public/</code> 디렉토리에 있는 파일들을 새로운 위치로 이동시킵니다. 파일 종류에 따른 정확한 위치에 대한 설명은 이미 설명한 <a href="#asset-organization">자원의 구성</a>을 보기 바랍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">There are a few issues when upgrading. The first is moving the files from <code>public/</code> to the new locations. See <a href="#asset-organization">Asset Organization</a> above for guidance on the correct locations for different file types.</p><p>다음으로, 자바스크립트 파일들이 중복되지 않도록 하는 것입니다. jQuery는 레일스 3.1버전부터 디폴트 자바스트립트 라이브러리로 포함되기 때문에 <code>jquery.js</code> 파일을 <code>app/assets</code> 디렉토리로 복사하는 별도의 작업이 필요치 않으며 레일스가 자동으로 포함시켜 줄 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Next will be avoiding duplicate JavaScript files. Since jQuery is the default JavaScript library from Rails 3.1 onwards, you don't need to copy <code>jquery.js</code> into <code>app/assets</code> and it will be included automatically.</p><p>세번째는, 환경 파일들을 올바른 디폴트 옵션으로 업데이트 해 주어야 합니다. 아래의 변경내용은 3.1.0 버전에서의 디폴트 내용을 보여 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The third is updating the various environment files with the correct default options. The following changes reflect the defaults in version 3.1.0.</p><p><code>application.rb</code> 파일에서는 아래와 같이 업데이트 하고 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In <code>application.rb</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# Enable the asset pipeline
+config.assets.enabled = true
+
+# Version of your assets, change this if you want to expire all your assets
+config.assets.version = '1.0'
+
+# Change the path that assets are served from
+# config.assets.prefix = "/assets"
+
+</pre>
+</div>
+<p><code>development.rb</code> 파일에서는 다음과 같이 업데이트해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In <code>development.rb</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# Do not compress assets
+config.assets.compress = false
+
+# Expands the lines which load the assets
+config.assets.debug = true
+
+</pre>
+</div>
+<p>그리고 <code>production.rb</code> 파일에서는 아래와 같이 변경해 줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">And in <code>production.rb</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# Compress JavaScripts and CSS
+config.assets.compress = true
+
+# Choose the compressors to use
+# config.assets.js_compressor  = :uglifier
+# config.assets.css_compressor = :yui
+
+# Don't fallback to assets pipeline if a precompiled asset is missed
+config.assets.compile = false
+
+# Generate digests for assets URLs.
+config.assets.digest = true
+
+# Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+# config.assets.precompile += %w( search.js )
+
+</pre>
+</div>
+<p><code>test.rb</code> 파일을 변경해서는 안됩니다. 테스트 환경에서의 디폴트 설정은, <code>config.assets.compile</code> 설정은 true 값, 그리고 <code>config.assets.compress</code>, <code>config.assets.debug</code>, <code>config.assets.digest</code> 설정은 모드 false 값으로 설정되어 있스빈다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You should not need to change <code>test.rb</code>. The defaults in the test environment are: <code>config.assets.compile</code> is true and <code>config.assets.compress</code>, <code>config.assets.debug</code> and <code>config.assets.digest</code> are false.</p><p>또한 아래의 내용을 <code>Gemfile</code>에 추가해 주어야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The following should also be added to <code>Gemfile</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails',   "~&gt; 3.2.3"
+  gem 'coffee-rails', "~&gt; 3.2.1"
+  gem 'uglifier'
+end
+
+</pre>
+</div>
+<p>Bundler와 함께 <code>assets</code> 그룹을 사용할 경우에는 <code>config/application.rb</code> 파일에 아래의 Bundler require 문이 있는지를 확인해야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you use the <code>assets</code> group with Bundler, please make sure that your <code>config/application.rb</code> has the following Bundler require statement:</p><p>운영서버로 배포전에 자원을 사전컴파일할 경우에는 아래의 코드라인을 사용해야 합니다. [[[ If you precompile assets before deploying to production, use this line]]] </p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# If you precompile assets before deploying to production, use this line
+Bundler.require *Rails.groups(:assets =&gt; %w(development test))
+
+</pre>
+</div>
+<p>그러나 자원들을 운영서버에서 필요시 컴파일되도록 할 경우에는 아래의 코드라인을 사용해야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you want your assets lazily compiled in production, use this line</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# If you want your assets lazily compiled in production, use this line
+Bundler.require(:default, :assets, Rails.env)
+
+</pre>
+</div>
+<p>또한, 환경별로 자원에 대한 처리를 별도로 할 경우에는 아래와 같은 코드라인을 사용해야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Instead of the generated version:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(:default, Rails.env)
+
+</pre>
+</div>
+
+
+        <h3>피드백</h3>
+        <p>
+          이 가이드의 질을 향상시키기 위한 도움을 기다리고 있습니다.
+        </p>
+        <p>
+          수정이 필요한 오타나 에러를 발견하면 <a href="https://github.com/lifo/docrails">docrails</a>을 클론한 후 직접 변경내용을 push하시기 바랍니다. 레일스의 해당 브랜치는 누구나가 write 권한이 있습니다. 커밋한 내용에 대해서는 검토작업이 이루어질 것이지만 변경내용을 서밋한 이후에 진행됩니다. <a href="https://github.com/lifo/docrails">docrails</a>은 정기적으로 master 브랜치와 클로스 머지됩니다. 
+        </p>
+        <p>
+          미완성된 내용이나 업데이트되지 않은 내용이 있을 수 있습니다. 누락된 문서를 추가해 주시기 바랍니다. 문서작성시 참고해야할 스타일과 규칙은 <a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a>를 확인하시기 바랍니다. 
+        </p>
+        <p>
+          어떤 이유에서든지, 수정이 필요한 부분을 직접 변경할 수 없는 경우에는 <a href="https://github.com/rails/rails/issues">open an issue</a>로 접속하여 문제점을 제출해 주시기 바랍니다. 
+        </p>
+        <p>
+          마지막으로, 루비온레일스 문서화에 관련된 논의가 필요한 사항은 <a href="http://groups.google.com/group/rubyonrails-docs">rubyonrails-docs mailing list</a>에서 해 주시기 바랍니다. 
+        </p>
+        <h3>문서생성일</h3>
+        <p>최종 생성일 : 2015-01-26 09:09:20 +0900 </p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>이 작업은 <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License 특허권을 가지고 있습니다.</p>
+<p>"Rails", "Ruby on Rails", 그리고 레일스 로고는 David Heinemeier Hansson의 등록상표이며, 저작권 보호를 받고 있습니다.</p>
+
+
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/responsive-tables.js"></script>
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+    $(guidesIndex.bind);
+  </script>
+</body>
+</html>

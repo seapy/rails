@@ -1,0 +1,825 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>레일스 제너레이터 &amp; 템플릿을 생성과 커스터마이즈하기(Creating and Customizing Rails Generators &amp; Templates) {원문·전체} — Ruby on Rails Guides</title>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+
+<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body class="guide">
+  <div>
+    <img src="images/edge_badge.png" alt="edge-badge" id="edge-badge" />
+  </div>
+  <div id="topNav">
+    <div class="wrapper">
+      <strong class="more-info-label">More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <span class="red-button more-info-button">
+        More Ruby on Rails
+      </span>
+      <ul class="more-info-links s-hidden">
+        <li class="more-info"><a href="http://rubyonrails.org/">개요</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/download">다운로드</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/deploy">배포</a></li>
+        <li class="more-info"><a href="https://github.com/rails/rails">코드</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/screencasts">스크린캐스트</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/documentation">도큐먼트</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/ecosystem">생태계</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/community">커뮤니티</a></li>
+        <li class="more-info"><a href="http://weblog.rubyonrails.org/">블로그</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <ul class="nav">
+        <li><a class="nav-item" href="index.html">홈</a></li>
+        <li class="guides-index guides-index-large">
+          <a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu" class="guides-index-item nav-item">가이드 인덱스</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+              <dl class="L">
+                <dt>Start Here</dt>
+                <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+                <dt>Models</dt>
+                <dd><a href="active_record_basics.html">Active Record Basics</a></dd>
+                <dd><a href="active_record_migrations.html">Active Record Migrations</a></dd>
+                <dd><a href="active_record_validations.html">Active Record Validations</a></dd>
+                <dd><a href="active_record_callbacks.html">Active Record Callbacks</a></dd>
+                <dd><a href="association_basics.html">Active Record Associations</a></dd>
+                <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+                <dt>Views</dt>
+                <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+                <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+                <dt>Controllers</dt>
+                <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+                <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+              </dl>
+              <dl class="R">
+                <dt>Digging Deeper</dt>
+                <dd><a href="active_support_core_extensions.html">Active Support Core Extensions</a></dd>
+                <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+                <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+                <dd><a href="active_job_basics.html">Active Job Basics</a></dd>
+                <dd><a href="security.html">Securing Rails Applications</a></dd>
+                <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+                <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+                <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+                <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
+                <dd><a href="working_with_javascript_in_rails.html">Working with JavaScript in Rails</a></dd>
+                <dd><a href="autoloading_and_reloading_constants.html">Autoloading and Reloading Constants</a></dd>
+                <dt>Extending Rails</dt>
+                <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+                <dd><a href="generators.html">Creating and Customizing Rails Generators</a></dd>
+                <dt>Contributing to Ruby on Rails</dt>
+                <dd><a href="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</a></dd>
+                <dd><a href="api_documentation_guidelines.html">API Documentation Guidelines</a></dd>
+                <dd><a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a></dd>
+                <dt>Maintenance Policy</dt>
+                <dd><a href="maintenance_policy.html">Maintenance Policy</a></dd>
+                <dt>Release Notes</dt>
+                <dd><a href="upgrading_ruby_on_rails.html">Upgrading Ruby on Rails</a></dd>
+                <dd><a href="4_2_release_notes.html">Ruby on Rails 4.2 Release Notes</a></dd>
+                <dd><a href="4_1_release_notes.html">Ruby on Rails 4.1 Release Notes</a></dd>
+                <dd><a href="4_0_release_notes.html">Ruby on Rails 4.0 Release Notes</a></dd>
+                <dd><a href="3_2_release_notes.html">Ruby on Rails 3.2 Release Notes</a></dd>
+                <dd><a href="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</a></dd>
+                <dd><a href="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</a></dd>
+                <dd><a href="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</a></dd>
+                <dd><a href="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</a></dd>
+              </dl>
+          </div>
+        </li>
+        <li><a class="nav-item" href="contributing_to_ruby_on_rails.html">기여하기</a></li>
+        <li><a class="nav-item" href="credits.html">크레딧</a></li>
+        <li class="guides-index guides-index-small">
+          <select class="guides-index-item nav-item">
+            <option value="index.html">가이드 인덱스</option>
+              <optgroup label="Start Here">
+                  <option value="getting_started.html">Getting Started with Rails</option>
+              </optgroup>
+              <optgroup label="Models">
+                  <option value="active_record_basics.html">Active Record Basics</option>
+                  <option value="active_record_migrations.html">Active Record Migrations</option>
+                  <option value="active_record_validations.html">Active Record Validations</option>
+                  <option value="active_record_callbacks.html">Active Record Callbacks</option>
+                  <option value="association_basics.html">Active Record Associations</option>
+                  <option value="active_record_querying.html">Active Record Query Interface</option>
+              </optgroup>
+              <optgroup label="Views">
+                  <option value="layouts_and_rendering.html">Layouts and Rendering in Rails</option>
+                  <option value="form_helpers.html">Action View Form Helpers</option>
+              </optgroup>
+              <optgroup label="Controllers">
+                  <option value="action_controller_overview.html">Action Controller Overview</option>
+                  <option value="routing.html">Rails Routing from the Outside In</option>
+              </optgroup>
+              <optgroup label="Digging Deeper">
+                  <option value="active_support_core_extensions.html">Active Support Core Extensions</option>
+                  <option value="i18n.html">Rails Internationalization API</option>
+                  <option value="action_mailer_basics.html">Action Mailer Basics</option>
+                  <option value="active_job_basics.html">Active Job Basics</option>
+                  <option value="security.html">Securing Rails Applications</option>
+                  <option value="debugging_rails_applications.html">Debugging Rails Applications</option>
+                  <option value="configuring.html">Configuring Rails Applications</option>
+                  <option value="command_line.html">Rails Command Line Tools and Rake Tasks</option>
+                  <option value="asset_pipeline.html">Asset Pipeline</option>
+                  <option value="working_with_javascript_in_rails.html">Working with JavaScript in Rails</option>
+                  <option value="autoloading_and_reloading_constants.html">Autoloading and Reloading Constants</option>
+              </optgroup>
+              <optgroup label="Extending Rails">
+                  <option value="rails_on_rack.html">Rails on Rack</option>
+                  <option value="generators.html">Creating and Customizing Rails Generators</option>
+              </optgroup>
+              <optgroup label="Contributing to Ruby on Rails">
+                  <option value="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</option>
+                  <option value="api_documentation_guidelines.html">API Documentation Guidelines</option>
+                  <option value="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</option>
+              </optgroup>
+              <optgroup label="Maintenance Policy">
+                  <option value="maintenance_policy.html">Maintenance Policy</option>
+              </optgroup>
+              <optgroup label="Release Notes">
+                  <option value="upgrading_ruby_on_rails.html">Upgrading Ruby on Rails</option>
+                  <option value="4_2_release_notes.html">Ruby on Rails 4.2 Release Notes</option>
+                  <option value="4_1_release_notes.html">Ruby on Rails 4.1 Release Notes</option>
+                  <option value="4_0_release_notes.html">Ruby on Rails 4.0 Release Notes</option>
+                  <option value="3_2_release_notes.html">Ruby on Rails 3.2 Release Notes</option>
+                  <option value="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</option>
+                  <option value="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</option>
+                  <option value="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</option>
+                  <option value="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</option>
+              </optgroup>
+          </select>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>레일스 제너레이터 &amp; 템플릿을 생성과 커스터마이즈하기<span class="original-text-h">(Creating and Customizing Rails Generators &amp; Templates)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></h2><p>작업 흐름을 향상시키려 한다면, 레일스 제너레이터는 필수적인 도구입니다. 이 가이드는 제너레이터를 생성과 커스터마이즈하는 방법을 알려드립니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Rails generators are an essential tool if you plan to improve your workflow. With this guide you will learn how to create generators and customize existing ones.</p><p>본 가이드를 통해 다음의 내용들을 얻을 수 있습니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">After reading this guide, you will know:</p>
+<ul>
+<li><p>어플리케이션에서 이용가능한 제너레이터를 보는 방법. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How to see which generators are available in your application.</p></li>
+<li><p>템플릿을 사용하여 제너레이터를 생성하는 방법. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How to create a generator using templates.</p></li>
+<li><p>제너레이터를 호출할때, 레일스가 제너레이터를 찾는 방법. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How Rails searches for generators before invoking them.</p></li>
+<li><p>새로운 제너레이터를 생성하여 scaffold를 커스터마이즈하는 방법. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How to customize your scaffold by creating new generators.</p></li>
+<li><p>제너레이터 템플릿을 변경하여 scaffold를 커스터마이즈하는 방법. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How to customize your scaffold by changing generator templates.</p></li>
+<li><p>수많은 제너레이터 세트들의 중복을 피하기 위한 방법. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How to use fallbacks to avoid overwriting a huge set of generators.</p></li>
+<li><p>어플리케이션 템플릿을 생성하는 방법. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">How to create an application template.</p></li>
+</ul>
+
+
+                <div id="subCol">
+            <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+            <ol class="chapters">
+<li><a href="#%EC%B2%AB-%EB%8C%80%EB%A9%B4-first-contact">첫 대면 [[[First Contact]]]</a></li>
+<li><a href="#%EC%A0%9C%EB%84%88%EB%A0%88%EC%9D%B4%ED%84%B0-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0-creating-your-first-generator">제너레이터 생성하기 [[[Creating Your First Generator]]]</a></li>
+<li><a href="#%EC%A0%9C%EB%84%88%EB%A0%88%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-%EC%A0%9C%EB%84%88%EB%A0%88%EC%9D%B4%ED%84%B0-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0-creating-generators-with-generators">제너레이터를 이용하여 제너레이터 생성하기 [[[Creating Generators with Generators]]]</a></li>
+<li><a href="#%EC%A0%9C%EB%84%88%EB%A0%88%EC%9D%B4%ED%84%B0-%EC%B0%BE%EA%B8%B0-generators-lookup">제너레이터 찾기[[[Generators Lookup]]]</a></li>
+<li><a href="#%EC%9E%91%EC%97%85%ED%9D%90%EB%A6%84%EC%9D%84-%EC%BB%A4%EC%8A%A4%ED%84%B0%EB%A7%88%EC%9D%B4%EC%A6%88%ED%95%98%EA%B8%B0-customizing-your-workflow">작업흐름을 커스터마이즈하기[[[Customizing Your Workflow]]]</a></li>
+<li><a href="#%EC%A0%9C%EB%84%88%EB%A0%88%EC%9D%B4%ED%84%B0-%ED%85%9C%ED%94%8C%EB%A6%BF%EC%9D%84-%EB%B3%80%EA%B2%BD%ED%95%98%EC%97%AC-%EC%9E%91%EC%97%85%ED%9D%90%EB%A6%84%EC%9D%84-%EC%BB%A4%EC%8A%A4%ED%84%B0%EB%A7%88%EC%9D%B4%EC%A6%88%ED%95%98%EA%B8%B0-customizing-your-workflow-by-changing-generators-templates">제너레이터 템플릿을 변경하여 작업흐름을 커스터마이즈하기 [[[Customizing Your Workflow by Changing Generators Templates]]]</a></li>
+<li><a href="#%EC%A0%9C%EB%84%88%EB%A0%88%EC%9D%B4%ED%84%B0-fallback%EC%9D%84-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0-adding-generators-fallbacks">제너레이터 fallback을 추가하기 [[[Adding Generators Fallbacks]]]</a></li>
+<li><a href="#%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%ED%85%9C%ED%94%8C%EB%A6%BF-application-templates">어플리케이션 템플릿 [[[Application Templates]]]</a></li>
+<li>
+<a href="#%EC%A0%9C%EB%84%88%EB%A0%88%EC%9D%B4%ED%84%B0-%EB%A9%94%EC%86%8C%EB%93%9C-generator-methods">제너레이터 메소드 [[[Generator methods]]]</a>
+
+<ul>
+<li><a href="#gem"><code>gem</code></a></li>
+<li><a href="#gem-group"><code>gem_group</code></a></li>
+<li><a href="#add-source"><code>add_source</code></a></li>
+<li><a href="#inject-into-file"><code>inject_into_file</code></a></li>
+<li><a href="#gsub-file"><code>gsub_file</code></a></li>
+<li><a href="#application"><code>application</code></a></li>
+<li><a href="#git"><code>git</code></a></li>
+<li><a href="#vendor"><code>vendor</code></a></li>
+<li><a href="#lib"><code>lib</code></a></li>
+<li><a href="#rakefile"><code>rakefile</code></a></li>
+<li><a href="#initializer"><code>initializer</code></a></li>
+<li><a href="#generate"><code>generate</code></a></li>
+<li><a href="#rake"><code>rake</code></a></li>
+<li><a href="#capify-bang"><code>capify!</code></a></li>
+<li><a href="#route"><code>route</code></a></li>
+<li><a href="#readme"><code>readme</code></a></li>
+</ul>
+</li>
+</ol>
+
+          </div>
+
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <h3 id="첫-대면-first-contact">1 첫 대면 [[[First Contact]]]</h3><p><code>rails</code> 명령어를 사용하여 어플리케이션을 생성할 때, 사실 레일즈 제너레이터를 사용하는 것입니다. 어플리케이션 생성 후, <code>rails generate</code>를 하면 사용가능한 제너레이터의 목록을 확인할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">When you create an application using the <code>rails</code> command, you are in fact using a Rails generator. After that, you can get a list of all available generators by just invoking <code>rails generate</code>:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails new myapp
+$ cd myapp
+$ rails generate
+
+</pre>
+</div>
+<p>레일스에 딸려 있는 모든 제너레이터 목록을 확인할 수 있습니다. 예를 들어, helper 제너레이터의 자세한 설명이 필요하다면, 아래와 같이 실행하면 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You will get a list of all generators that comes with Rails. If you need a detailed description of the helper generator, for example, you can simply do:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate helper --help
+
+</pre>
+</div>
+<h3 id="제너레이터-생성하기-creating-your-first-generator">2 제너레이터 생성하기 [[[Creating Your First Generator]]]</h3><p>레일즈 3.0 이래로, 제너레이터는 <a href="https://github.com/wycats/thor">Thor</a> 기반으로 만들어졌습니다. Thor는 파일을 다루기 위한 강력한 API와 분석을 위한 멋진 옵션을 제공합니다. 예를 들어, <code>config/initializers</code> 안에 <code>initializer.rb</code> 이름의 initializer 파일을 생성하는 제너레이터를 만들어봅시다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Since Rails 3.0, generators are built on top of <a href="https://github.com/wycats/thor">Thor</a>. Thor provides powerful options parsing and a great API for manipulating files. For instance, let's build a generator that creates an initializer file named <code>initializer.rb</code> inside <code>config/initializers</code>.</p><p>첫번째 단계는 <code>lib/generators/initializer_generator.rb</code> 경로에 아래의 내용으로 파일을 생성하는 것입니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The first step is to create a file at <code>lib/generators/initializer_generator.rb</code> with the following content:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class InitializerGenerator &lt; Rails::Generators::Base
+  def create_initializer_file
+    create_file "config/initializers/initializer.rb", "# Add initialization content here"
+  end
+end
+
+</pre>
+</div>
+<div class="note">
+<p> <code>create_file</code>는 <code>Thor::Actions</code>에 의해 제공되는 메소드입니다. 관련 문서는 <a href="http://rdoc.info/github/wycats/thor/master/Thor/Actions.html">Thor's documentation</a>에서 확인할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text"><code>create_file</code> is a method provided by <code>Thor::Actions</code>. Documentation for <code>create_file</code> and other Thor methods can be found in <a href="http://rdoc.info/github/wycats/thor/master/Thor/Actions.html">Thor's documentation</a></p>
+</div><p>새 제너레이터는 매우 단순합니다: <code>Rails::Generators::Base</code>를 상속하고 하나의 메소드를 정의하였습니다. 제너레이터가 호출될 때, 제너레이터 안의 각 public 메소드는 정의된 순서대로 실행됩니다. 마침내, 주어진 내용과 함께 주어진 경로에 파일을 생성할 <code>create_file</code> 메소드를 실행하게 됩니다. 만약 Rails Application Templates API에 친숙하다면, 새로운 제너레이터 API 또한 편하게 느껴질 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Our new generator is quite simple: it inherits from <code>Rails::Generators::Base</code> and has one method definition. When a generator is invoked, each public method in the generator is executed sequentially in the order that it is defined. Finally, we invoke the <code>create_file</code> method that will create a file at the given destination with the given content. If you are familiar with the Rails Application Templates API, you'll feel right at home with the new generators API.</p><p>새로운 제너레이터를 호출하기 위해, 우리는 아래와 같이 실행하면 됩니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">To invoke our new generator, we just need to do:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate initializer
+
+</pre>
+</div>
+<p>실행하기에 앞서, 새롭게 만든 제너레이터의 설명을 봅시다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Before we go on, let's see our brand new generator description:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate initializer --help
+
+</pre>
+</div>
+<p>만약 제너레이터가 <code>ActiveRecord::Generators::ModelGenerator</code>와 같이 namespaced 된다면, 레일스는 보통 좋은 설명을 생성할 수 있지만, 이 경우는 예외입니다. 이 문제를 두 가지 방법으로 해결할 수 있습니다. 첫 번째는 제너레이터 안에 <code>desc</code> 메소드를 호출하는 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Rails is usually able to generate good descriptions if a generator is namespaced, as <code>ActiveRecord::Generators::ModelGenerator</code>, but not in this particular case. We can solve this problem in two ways. The first one is calling <code>desc</code> inside our generator:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class InitializerGenerator &lt; Rails::Generators::Base
+  desc "This generator creates an initializer file at config/initializers"
+  def create_initializer_file
+    create_file "config/initializers/initializer.rb", "# Add initialization content here"
+  end
+end
+
+</pre>
+</div>
+<p>이제 우리는 <code>--help</code>을 호출하여 우리가 입력한 설명을 확인할 수 있습니다. 두 번째 방법은 같은 경로에 있는 USAGE 파일을 생성하는 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Now we can see the new description by invoking <code>--help</code> on the new generator. The second way to add a description is by creating a file named <code>USAGE</code> in the same directory as our generator. We are going to do that in the next step.</p><h3 id="제너레이터를-이용하여-제너레이터-생성하기-creating-generators-with-generators">3 제너레이터를 이용하여 제너레이터 생성하기 [[[Creating Generators with Generators]]]</h3><p>제너레이터를 위한 제너레이터를 가지고 있습니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Generators themselves have a generator:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate generator initializer
+      create  lib/generators/initializer
+      create  lib/generators/initializer/initializer_generator.rb
+      create  lib/generators/initializer/USAGE
+      create  lib/generators/initializer/templates
+
+</pre>
+</div>
+<p>이를 통해 단순한 제너레이터가 생성됩니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This is the generator just created:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class InitializerGenerator &lt; Rails::Generators::NamedBase
+  source_root File.expand_path("../templates", __FILE__)
+end
+
+</pre>
+</div>
+<p>먼저, <code>Rails::Generators::Base</code> 대신에 <code>Rails::Generators::NamedBase</code>를 상속하고 있는 부분을 주의깊게 봅시다. 이것은 initializer의 이름과 코드의 변수명으로 사용될 인자가 적어도 하나 필요하다는 것을 의미합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">First, notice that we are inheriting from <code>Rails::Generators::NamedBase</code> instead of <code>Rails::Generators::Base</code>. This means that our generator expects at least one argument, which will be the name of the initializer, and will be available in our code in the variable <code>name</code>.</p><p>제너레이터를 호출하여 새로운 제너레이터의 설명을 볼 수 있습니다. (이전 제너레이터 파일을 삭제해야만 합니다.) <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">We can see that by invoking the description of this new generator (don't forget to delete the old generator file):</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate initializer --help
+Usage:
+  rails generate initializer NAME [options]
+
+</pre>
+</div>
+<p>우리는 또한 새로 만든 제너레이터가 source_root 클래스 메소드를 가지는 것을 볼 수 있습니다. 이 메소드는 우리의 제너레이터 템플릿이 위치할 곳을 지정합니다, 지정하지 않으면 <code>lib/generators/initializer/templates</code>로 지정됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">We can also see that our new generator has a class method called <code>source_root</code>. This method points to where our generator templates will be placed, if any, and by default it points to the created directory <code>lib/generators/initializer/templates</code>.</p><p>제너레이터 템플릿이 의미하는 바를 이해하기 위해서, 아래와 같이 <code>lib/generators/initializer/templates/initializer.rb</code>을 만들어봅시다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In order to understand what a generator template means, let's create the file <code>lib/generators/initializer/templates/initializer.rb</code> with the following content:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# Add initialization content here
+
+</pre>
+</div>
+<p>제너레이터 실행 시 이 템플릿을 복사하기 위해 제너레이터를 수정해봅시다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">And now let's change the generator to copy this template when invoked:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class InitializerGenerator &lt; Rails::Generators::NamedBase
+  source_root File.expand_path("../templates", __FILE__)
+
+  def copy_initializer_file
+    copy_file "initializer.rb", "config/initializers/#{file_name}.rb"
+  end
+end
+
+</pre>
+</div>
+<p>이제 만든 제너레이터를 실행해보면: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">And let's execute our generator:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate initializer core_extensions
+
+</pre>
+</div>
+<p>이제 core_extensions으로 명시된 initializer가 템플릿 내용과 함께 <code>config/initializers/core_extensions.rb</code>에 생성되는 것을 볼 수 있습니다. <code>copy_file</code>이 우리가 설정한 destination path의 소스 루트 안에 파일을 복사하기 때문입니다. 그리고 <code>file_name</code> 메소드는 <code>Rails::Generators::NamedBase</code>로부터 상속할 때 자동적으로 생성됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">We can see that now an initializer named core_extensions was created at <code>config/initializers/core_extensions.rb</code> with the contents of our template. That means that <code>copy_file</code> copied a file in our source root to the destination path we gave. The method <code>file_name</code> is automatically created when we inherit from <code>Rails::Generators::NamedBase</code>.</p><p>제너레이터에서 이용가능한 메소드는 이 가이드의 마지막 섹션에서 다룹니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The methods that are available for generators are covered in the <a href="#generator-methods">final section</a> of this guide.</p><h3 id="제너레이터-찾기-generators-lookup">4 제너레이터 찾기[[[Generators Lookup]]]</h3><p><code>rails generate initializer core_extensions</code>를 실행할 때, 레일스에서는 하나를 찾을 때까지 차례대로 이 파일들을 요청합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">When you run <code>rails generate initializer core_extensions</code> Rails requires these files in turn until one is found:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+rails/generators/initializer/initializer_generator.rb
+generators/initializer/initializer_generator.rb
+rails/generators/initializer_generator.rb
+generators/initializer_generator.rb
+
+</pre>
+</div>
+<p>만약 없다면 에러 메시지를 받게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If none is found you get an error message.</p><div class="info">
+<p> 해당 디렉토리가 $LOAD_PATH의 속하기 때문에, 위의 예제는 어플리케이션의 lib 아래에 파일을 넣게 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">The examples above put files under the application's <code>lib</code> because said directory belongs to <code>$LOAD_PATH</code>.</p>
+</div><h3 id="작업흐름을-커스터마이즈하기-customizing-your-workflow">5 작업흐름을 커스터마이즈하기[[[Customizing Your Workflow]]]</h3><p>레일스의 제너레이터는 당신이 scaffolding을 커스터마이즈하기 충분히 유연합니다. 그것들은 config/applications.rb 파일 안에 설정할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Rails own generators are flexible enough to let you customize scaffolding. They can be configured in <code>config/application.rb</code>, these are some defaults:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.generators do |g|
+  g.orm             :active_record
+  g.template_engine :erb
+  g.test_framework  :test_unit, fixture: true
+end
+
+</pre>
+</div>
+<p>작업흐름을 커스터마이즈하기 전에, 먼저 scaffold를 하나 만들어봅시다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Before we customize our workflow, let's first see what our scaffold looks like:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate scaffold User name:string
+      invoke  active_record
+      create    db/migrate/20091120125558_create_users.rb
+      create    app/models/user.rb
+      invoke    test_unit
+      create      test/models/user_test.rb
+      create      test/fixtures/users.yml
+      invoke  resource_route
+       route    resources :users
+      invoke  scaffold_controller
+      create    app/controllers/users_controller.rb
+      invoke    erb
+      create      app/views/users
+      create      app/views/users/index.html.erb
+      create      app/views/users/edit.html.erb
+      create      app/views/users/show.html.erb
+      create      app/views/users/new.html.erb
+      create      app/views/users/_form.html.erb
+      invoke    test_unit
+      create      test/controllers/users_controller_test.rb
+      invoke    helper
+      create      app/helpers/users_helper.rb
+      invoke      test_unit
+      create        test/helpers/users_helper_test.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/users.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/users.css.scss
+      invoke  scss
+      create    app/assets/stylesheets/scaffolds.css.scss
+
+</pre>
+</div>
+<p>이 결과에서 보면, 레일즈 3.0 이상 버전에서 제너레이터가 어떻게 동작하는지 이해하기가 쉽습니다. scaffold 제너레이터는 실제로 다른 것들을 생성하지 않습니다, 단지 다른 제너레이터 작업을 호출하는 것입니다. 이것은 우리에게 이러한 호출을 add/replace/remove 하도록 허용하는 것입니다. 예를 들어, scaffold 제너레이터는 erb, test_unit, helper 제너레이터를 호출하는 scaffold_controller 제너레이터를 호출합니다. 각 제너레이터는 개별적인 역할을 가지고 있기 때문데, 코드의 중복을 피하며 재사용하기 쉽습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Looking at this output, it's easy to understand how generators work in Rails 3.0 and above. The scaffold generator doesn't actually generate anything, it just invokes others to do the work. This allows us to add/replace/remove any of those invocations. For instance, the scaffold generator invokes the scaffold_controller generator, which invokes erb, test_unit and helper generators. Since each generator has a single responsibility, they are easy to reuse, avoiding code duplication.</p><p>작업흐름 상에서 우리의 첫 커스터마이제이션은 scaffold를 위한 stylesheets와 test fixtures 생성하지 않는 것입니다. 아래와 같이 변경을 해봅시다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Our first customization on the workflow will be to stop generating stylesheets and test fixtures for scaffolds. We can achieve that by changing our configuration to the following:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.generators do |g|
+  g.orm             :active_record
+  g.template_engine :erb
+  g.test_framework  :test_unit, fixture: false
+  g.stylesheets     false
+end
+
+</pre>
+</div>
+<p>만약 scaffold 제너레이터와 함께 다른 리소스를 생성하면, 우리는 stylesheets와 fixture 생성하지 않는 것을 볼 수 있습니다. 만약 추가로 커스터마이즈하려면, 예를 들어 ActiveRecord와 TestUnit 대신에 DataMapper와 RSpec을 사용하는 것처럼, 단지 어플리케이션에 젬을 추가하고 당신의 제너레이터를 설정에 추가하기만 하면 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If we generate another resource with the scaffold generator, we can see that neither stylesheets nor fixtures are created anymore. If you want to customize it further, for example to use DataMapper and RSpec instead of Active Record and TestUnit, it's just a matter of adding their gems to your application and configuring your generators.</p><p>이것을 시연해보기 위해서, 인스턴스 변수 reader만 추가하는 helper 제너레이터를 생성할 것입니다. 이를 위해 첫번째, 레일스 네임스페이스 안에 제너레이터를 생성합니다, 레일스가 hook을 사용하여 제너레이터를 찾는 곳이기 때문입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">To demonstrate this, we are going to create a new helper generator that simply adds some instance variable readers. First, we create a generator within the rails namespace, as this is where rails searches for generators used as hooks:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate generator rails/my_helper
+
+</pre>
+</div>
+<p>이 다음으로, 더이상 필요하지 않는 템플릿 디렉토리와 <code>source_root</code> 클래스 메소드를 삭제할 수 있습니다. 우리의 새로운 제너레이터는 다음과 같습니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">After that, we can delete both the <code>templates</code> directory and the <code>source_root</code> class method from our new generators, because we are not going to need them. So our new generator looks like the following:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Rails::MyHelperGenerator &lt; Rails::Generators::NamedBase
+  def create_helper_file
+    create_file "app/helpers/#{file_name}_helper.rb", &lt;&lt;-FILE
+module #{class_name}Helper
+  attr_reader :#{plural_name}, :#{plural_name.singularize}
+end
+    FILE
+  end
+end
+
+</pre>
+</div>
+<p>사용자들을 위한 helper를 만들기 위해 새로운 제너레이터를 사용해볼 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">We can try out our new generator by creating a helper for users:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate my_helper products
+
+</pre>
+</div>
+<p>그것은 <code>app/helpers</code> 경로에 다음의 helper 파일을 생성합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">And it will generate the following helper file in <code>app/helpers</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+module ProductsHelper
+  attr_reader :products, :product
+end
+
+</pre>
+</div>
+<p>이제 우리는 config/applications.rb 파일을 다시 수정함으로써, scaffold에 우리의 새로운 helper 제너레이터를 사용하도록 할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Which is what we expected. We can now tell scaffold to use our new helper generator by editing <code>config/application.rb</code> once again:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.generators do |g|
+  g.orm             :active_record
+  g.template_engine :erb
+  g.test_framework  :test_unit, fixture: false
+  g.stylesheets     false
+  g.helper          :my_helper
+end
+
+</pre>
+</div>
+<p>그리고 이것은 제너레이터를 호출할 때 실행됩니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">and see it in action when invoking the generator:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate scaffold Post body:text
+      [...]
+      invoke    my_helper
+      create      app/helpers/posts_helper.rb
+
+</pre>
+</div>
+<p>우리의 새로운 helper가 레일스 기본 helper 대신 실행되는 것을 결과물로 확인할 수 있습니다. 그러나 새로운 제너레이터를 위한 테스트와 테스트 실행 빠졌기에, 우리는 기존의 helpers test 제너레이터를 재사용할 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">We can notice on the output that our new helper was invoked instead of the Rails default. However one thing is missing, which is tests for our new generator and to do that, we are going to reuse old helpers test generators.</p><p>레일즈 3.0 이후로, 이는 hook 컨셉 덕분에 쉬워졌습니다. 새로운 helper는 하나의 특정 테스트 프레임워크에 집중할 필요가 없습니다, 간단히 hook을 제공할 수 있고, 테스트 프레임워크는 단지 호환을 위한 hook를 적용할 필요가 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Since Rails 3.0, this is easy to do due to the hooks concept. Our new helper does not need to be focused in one specific test framework, it can simply provide a hook and a test framework just needs to implement this hook in order to be compatible.</p><p>이를 위해, 아래와 같이 제너레이터를 변경합니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">To do that, we can change the generator this way:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+class Rails::MyHelperGenerator &lt; Rails::Generators::NamedBase
+  def create_helper_file
+    create_file "app/helpers/#{file_name}_helper.rb", &lt;&lt;-FILE
+module #{class_name}Helper
+  attr_reader :#{plural_name}, :#{plural_name.singularize}
+end
+    FILE
+  end
+
+  hook_for :test_framework
+end
+
+</pre>
+</div>
+<p>이제, helper 제너레이터가 호출되고 TestUnit이 테스트 프레임워크로 설정되어졌을 때, 그것은 <code>Rails::TestUnitGenerator</code>와 <code>TestUnit::MyHelperGenerator</code>를 실행하려 할 것입니다. 아무것도 정의하지 않았기 때문에, 우리의 제너레이터에 <code>TestUnit::Generators::HelperGenerator</code>을 실행할 것을 지시할 수 있습니다. 이렇게 하기 위해, 아래와 같이 추가할 필요가 있습니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Now, when the helper generator is invoked and TestUnit is configured as the test framework, it will try to invoke both <code>Rails::TestUnitGenerator</code> and <code>TestUnit::MyHelperGenerator</code>. Since none of those are defined, we can tell our generator to invoke <code>TestUnit::Generators::HelperGenerator</code> instead, which is defined since it's a Rails generator. To do that, we just need to add:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+# Search for :helper instead of :my_helper
+hook_for :test_framework, as: :helper
+
+</pre>
+</div>
+<p>이제 다른 리소스를 위해 다시 scaffold를 실행할 수 있고 그것이 테스트를 잘 생성하는 것을 볼 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">And now you can re-run scaffold for another resource and see it generating tests as well!</p><h3 id="제너레이터-템플릿을-변경하여-작업흐름을-커스터마이즈하기-customizing-your-workflow-by-changing-generators-templates">6 제너레이터 템플릿을 변경하여 작업흐름을 커스터마이즈하기 [[[Customizing Your Workflow by Changing Generators Templates]]]</h3><p>이전까지 helper에 기능 추가없이 줄만 추가하였습니다. 기능을 추가하는 쉬운 방법은 이미 존재하는 제너레이터의 템플릿을 대체하는 것입니다, 위의 경우는 <code>Rails::Generators::HelperGenerator</code>입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In the step above we simply wanted to add a line to the generated helper, without adding any extra functionality. There is a simpler way to do that, and it's by replacing the templates of already existing generators, in that case <code>Rails::Generators::HelperGenerator</code>.</p><p>레일즈 3.0 이래로, 제너레이터는 템플릿의 소스 루트만 보는 것이 아니라, 다른 경로의 템플릿도 검색합니다. 그리고 그것 중에 하나로 <code>lib/templates</code> 폴더가 있습니다. 우리는 <code>Rails::Generators::HelperGenerator</code>를 커스터마이즈하기 원하기 때문에, <code>helper.rb</code>란 이름으로 <code>lib/templates/rails/helper</code> 안에 템플릿을 만들어서 복사합니다. 이제 아래 내용과 함께 파일을 만들어봅시다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In Rails 3.0 and above, generators don't just look in the source root for templates, they also search for templates in other paths. And one of them is <code>lib/templates</code>. Since we want to customize <code>Rails::Generators::HelperGenerator</code>, we can do that by simply making a template copy inside <code>lib/templates/rails/helper</code> with the name <code>helper.rb</code>. So let's create that file with the following content:</p><div class="code_container">
+<pre class="brush: ruby; html-script: true; gutter: false; toolbar: false">
+module &lt;%= class_name %&gt;Helper
+  attr_reader :&lt;%= plural_name %&gt;, :&lt;%= plural_name.singularize %&gt;
+end
+
+</pre>
+</div>
+<p>그리고 <code>config/application.rb</code>에서 변경한 내용을 되돌립니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">and revert the last change in <code>config/application.rb</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.generators do |g|
+  g.orm             :active_record
+  g.template_engine :erb
+  g.test_framework  :test_unit, fixture: false
+  g.stylesheets     false
+end
+
+</pre>
+</div>
+<p>만약 다른 리소스를 생성한다면, 동일한 결과를 확인할 수 있습니다. 만약 scaffold 템플릿과 레이아웃을 커스터마이즈하길 원한다면 <code>lib/templates/erb/scaffold</code> 안에 <code>edit.html.erb</code>, <code>index.html.erb</code>를 생성하면 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you generate another resource, you can see that we get exactly the same result! This is useful if you want to customize your scaffold templates and/or layout by just creating <code>edit.html.erb</code>, <code>index.html.erb</code> and so on inside <code>lib/templates/erb/scaffold</code>.</p><h3 id="제너레이터-fallback을-추가하기-adding-generators-fallbacks">7 제너레이터 fallback을 추가하기 [[[Adding Generators Fallbacks]]]</h3><p>제너레이터의 최신 기능 중에 매우 유용한 플러그인 하나는 fallback 입니다. 예를 들어, <a href="https://github.com/thoughtbot/shoulda">shoulda</a> 같은 TestUnit에 더하여 기능을 추가하길 원한다고 가정해봅시다. TestUnit은 이미 레일스에 의해 모든 제너레이터에 적용되고 shoulda는 그것의 일부분을 덮어쓰길 원하기 때문에, shoulda를 다른 제너레이터에 다시 적용할 필요가 없습니다. 만약 <code>Shoulda</code> namespace에 아무것도 없다면, 레일스가 단순히 <code>TestUnit</code>을 사용할 것을 요청할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">One last feature about generators which is quite useful for plugin generators is fallbacks. For example, imagine that you want to add a feature on top of TestUnit like <a href="https://github.com/thoughtbot/shoulda">shoulda</a> does. Since TestUnit already implements all generators required by Rails and shoulda just wants to overwrite part of it, there is no need for shoulda to reimplement some generators again, it can simply tell Rails to use a <code>TestUnit</code> generator if none was found under the <code>Shoulda</code> namespace.</p><p>우리는 <code>config/application.rb</code>를 변경해서 이 동작을 쉽게 시뮬레이트할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">We can easily simulate this behavior by changing our <code>config/application.rb</code> once again:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+config.generators do |g|
+  g.orm             :active_record
+  g.template_engine :erb
+  g.test_framework  :shoulda, fixture: false
+  g.stylesheets     false
+
+  # Add a fallback!
+  g.fallbacks[:shoulda] = :test_unit
+end
+
+</pre>
+</div>
+<p>이제, 만약 당신이 Comment scaffold를 생성한다면, shoulda 제너레이터가 호출되는 것을 볼 수 있을 것입니다, 그리고 마지막에는 TestUnit 제너레이터로 되돌아가는 것을 볼 수 있을 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Now, if you create a Comment scaffold, you will see that the shoulda generators are being invoked, and at the end, they are just falling back to TestUnit generators:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails generate scaffold Comment body:text
+      invoke  active_record
+      create    db/migrate/20091120151323_create_comments.rb
+      create    app/models/comment.rb
+      invoke    shoulda
+      create      test/models/comment_test.rb
+      create      test/fixtures/comments.yml
+      invoke  resource_route
+       route    resources :comments
+      invoke  scaffold_controller
+      create    app/controllers/comments_controller.rb
+      invoke    erb
+      create      app/views/comments
+      create      app/views/comments/index.html.erb
+      create      app/views/comments/edit.html.erb
+      create      app/views/comments/show.html.erb
+      create      app/views/comments/new.html.erb
+      create      app/views/comments/_form.html.erb
+      invoke    shoulda
+      create      test/controllers/comments_controller_test.rb
+      invoke    my_helper
+      create      app/helpers/comments_helper.rb
+      invoke      shoulda
+      create        test/helpers/comments_helper_test.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/comments.js.coffee
+      invoke    scss
+
+</pre>
+</div>
+<p>fallback은 당신의 제너레이터가 코드 재사용을 늘리고 중복을 감소시키면서 하나의 책임만 가지도록 해줍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Fallbacks allow your generators to have a single responsibility, increasing code reuse and reducing the amount of duplication.</p><h3 id="어플리케이션-템플릿-application-templates">8 어플리케이션 템플릿 [[[Application Templates]]]</h3><p>이제 제너레이터가 어플리케이션에서 어떻게 사용되는지 보았습니다, 당신은 제너레이터가 또한 어플리케이션을 만드는데도 사용될 수 있는 것을 알고 있나요? 이 제너레이터의 종류는 "template"로 불립니다. 아래는 Templates API의 짧은 개요이고 자세한 문서를 확인하려면 <a href="rails_application_templates.html">Rails Application Templates guide</a> 참고하세요. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Now that you've seen how generators can be used <em>inside</em> an application, did you know they can also be used to <em>generate</em> applications too? This kind of generator is referred as a "template". This is a brief overview of the Templates API. For detailed documentation see the <a href="rails_application_templates.html">Rails Application Templates guide</a>.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+gem "rspec-rails", group: "test"
+gem "cucumber-rails", group: "test"
+
+if yes?("Would you like to install Devise?")
+  gem "devise"
+  generate "devise:install"
+  model_name = ask("What would you like the user model to be called? [user]")
+  model_name = "user" if model_name.blank?
+  generate "devise", model_name
+end
+
+</pre>
+</div>
+<p>위의 템플릿에서 어플리케이션이 rspec-rails와 cucumber-rails gem에 의존하므로 이 젬들이 Gemfile의 test group에 추가하였습니다. 이 때, 우리는 Devise를 설치할 지 말지를 유저에게 물어봅니다. 만약 유저가 y 또는 yes로 응답하면, 템플릿은 Gemfile에 Devise를 추가하고 devise:install 제너레이터를 실행할 것입니다. 이 템플릿은 유저의 입력을 받고 답변에 따라 devise 제너레이터를 실행합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In the above template we specify that the application relies on the <code>rspec-rails</code> and <code>cucumber-rails</code> gem so these two will be added to the <code>test</code> group in the <code>Gemfile</code>. Then we pose a question to the user about whether or not they would like to install Devise. If the user replies "y" or "yes" to this question, then the template will add Devise to the <code>Gemfile</code> outside of any group and then runs the <code>devise:install</code> generator. This template then takes the users input and runs the <code>devise</code> generator, with the user's answer from the last question being passed to this generator.</p><p>이 템플릿이 template.rb 파일로 존재하는 것을 상상해봅시다. 우리는 -m 옵션과 템플릿 파일명을, rails new command의 결과를 변경하기 위해 사용할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Imagine that this template was in a file called <code>template.rb</code>. We can use it to modify the outcome of the <code>rails new</code> command by using the <code>-m</code> option and passing in the filename:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails new thud -m template.rb
+
+</pre>
+</div>
+<p>이 command는 Thud 어플리케이션을 생성하고, 생성된 output에 템플릿을 적용할 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This command will generate the <code>Thud</code> application, and then apply the template to the generated output.</p><p>템플릿은 꼭 로컬 시스템에 저장될 필요는 없습니다, -m 옵션은 온라인 템플릿을 지원합니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Templates don't have to be stored on the local system, the <code>-m</code> option also supports online templates:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rails new thud -m https://gist.github.com/radar/722911/raw/
+
+</pre>
+</div>
+<p>이 가이드의 마지막 섹션에서는 알려진 좋은 템플릿을 생성하는 방법을 다루지 않는 반면에, 당신이 그것을 스스로 개발할 수 있기 때문에, 당신의 처리에 이용 가능한 메소드들을 확인할 수 있습니다. 이와 동일한 메소드는 제너레이터에서도 이용가능합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Whilst the final section of this guide doesn't cover how to generate the most awesome template known to man, it will take you through the methods available at your disposal so that you can develop it yourself. These same methods are also available for generators.</p><h3 id="제너레이터-메소드-generator-methods">9 제너레이터 메소드 [[[Generator methods]]]</h3><p>아래는 제너레이터와 템플릿에서 사용할 수 있는 메소드들입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The following are methods available for both generators and templates for Rails.</p><div class="note">
+<p> Thor가 제공하는 메소드들은 이 가이드에서 다루지 않습니다, 자세한 문서는 <a href="http://rdoc.info/github/wycats/thor/master/Thor/Actions.html">Thor's documentation</a> 참고하시길 바랍니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">Methods provided by Thor are not covered this guide and can be found in <a href="http://rdoc.info/github/wycats/thor/master/Thor/Actions.html">Thor's documentation</a></p>
+</div><h4 id="gem">9.1 <code>gem</code>
+</h4><p>어플리케이션의 gem 의존성을 지정한다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Specifies a gem dependency of the application.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+gem "rspec", group: "test", version: "2.1.0"
+gem "devise", "1.1.5"
+
+</pre>
+</div>
+<p>이용가능한 옵션들: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Available options are:</p>
+<ul>
+<li>
+<code>:group</code> - Gem이 설치되어야할 <code>Gemfile</code>의 group [[[The group in the <code>Gemfile</code> where this gem should go.]]]</li>
+<li>
+<code>:version</code> - 사용하길 원하는 gem의 버전 [[[The version string of the gem you want to use. Can also be specified as the second argument to the method.]]]</li>
+<li>
+<code>:git</code> - git repository의 URL [[[The URL to the git repository for this gem.]]]</li>
+</ul>
+<p>추가할 옵션은 줄의 끝에 넣으면 됩니다: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Any additional options passed to this method are put on the end of the line:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+gem "devise", git: "git://github.com/plataformatec/devise", branch: "master"
+
+</pre>
+</div>
+<p>위의 코드는 <code>Gemfile</code> 아래에 라인을 추가합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The above code will put the following line into <code>Gemfile</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+gem "devise", git: "git://github.com/plataformatec/devise", branch: "master"
+
+</pre>
+</div>
+<h4 id="gem-group">9.2 <code>gem_group</code>
+</h4><p>그룹 안에 gem 항목을 감싼다(해당 그룹에 항목을 추가한다.) <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Wraps gem entries inside a group:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+gem_group :development, :test do
+  gem "rspec-rails"
+end
+
+</pre>
+</div>
+<h4 id="add-source">9.3 <code>add_source</code>
+</h4><p><code>Gemfile</code>에 특정 소스를 추가합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Adds a specified source to <code>Gemfile</code>:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+add_source "http://gems.github.com"
+
+</pre>
+</div>
+<h4 id="inject-into-file">9.4 <code>inject_into_file</code>
+</h4><p>당신의 파일 안, 명시된 위치에 코드 블록을 삽입합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Injects a block of code into a defined position in your file.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+inject_into_file 'name_of_file.rb', after: "#The code goes below this line. Don't forget the Line break at the end\n" do &lt;&lt;-'RUBY'
+  puts "Hello World"
+RUBY
+end
+
+</pre>
+</div>
+<h4 id="gsub-file">9.5 <code>gsub_file</code>
+</h4><p>파일 안의 텍스트를 교체합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Replaces text inside a file.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+gsub_file 'name_of_file.rb', 'method.to_be_replaced', 'method.the_replacing_code'
+
+</pre>
+</div>
+<p>이 메소드를 좀 더 정밀하게 만들기 위해 정규표현식이 사용될 수 있습니다. 당신은 또한 파일의 시작과 끝에 코드를 추가하기 위해 append_file과 prepend_file을 사용할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Regular Expressions can be used to make this method more precise. You can also use append_file and prepend_file in the same way to place code at the beginning and end of a file respectively.</p><h4 id="application">9.6 <code>application</code>
+</h4><p>application 클래스 선언 후, <code>config/application.rb</code>에 줄을 추가합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Adds a line to <code>config/application.rb</code> directly after the application class definition.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+application "config.asset_host = 'http://example.com'"
+
+</pre>
+</div>
+<p>이 메소드는 또한 블록 코드를 받을 수도 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This method can also take a block:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+application do
+  "config.asset_host = 'http://example.com'"
+end
+
+</pre>
+</div>
+<p>이용가능한 옵션들: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Available options are:</p>
+<ul>
+<li>
+<code>:env</code> - 설정 옵션의 환경을 명시합니다. 만약 블록 구문과 함께 이 옵션을 사용하길 바란다면 추천하는 구문은 아래와 같습니다: [[[Specify an environment for this configuration option. If you wish to use this option with the block syntax the recommended syntax is as follows:]]]</li>
+</ul>
+<div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+application(nil, env: "development") do
+  "config.asset_host = 'http://localhost:3000'"
+end
+
+</pre>
+</div>
+<h4 id="git">9.7 <code>git</code>
+</h4><p>git command를 실행한다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Runs the specified git command:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+git :init
+git add: "."
+git commit: "-m First commit!"
+git add: "onefile.rb", rm: "badfile.cxx"
+
+</pre>
+</div>
+<p>이 해쉬 값은 특정 git command를 통과합니다. 마지막 예제에서 보여지는 것처럼, 여러 git command는 한 번에 실행할 수 있습니다, 그러나 실행 순서는 지시한 순서대로 동작하리라는 보장은 되지 않습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The values of the hash here being the arguments or options passed to the specific git command. As per the final example shown here, multiple git commands can be specified at a time, but the order of their running is not guaranteed to be the same as the order that they were specified in.</p><h4 id="vendor">9.8 <code>vendor</code>
+</h4><p>특정 코드를 포함하는 vendor에 파일을 추가합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Places a file into <code>vendor</code> which contains the specified code.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+vendor "sekrit.rb", '#top secret stuff'
+
+</pre>
+</div>
+<p>이 메소드는 또한 블록 코드를 받을 수도 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This method also takes a block:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+vendor "seeds.rb" do
+  "puts 'in ur app, seeding ur database'"
+end
+
+</pre>
+</div>
+<h4 id="lib">9.9 <code>lib</code>
+</h4><p>특정 코드를 포함하는 lib에 파일을 추가합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Places a file into <code>lib</code> which contains the specified code.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+lib "special.rb", "p Rails.root"
+
+</pre>
+</div>
+<p>이 메소드는 또한 블록 코드를 받을 수도 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This method also takes a block:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+lib "super_special.rb" do
+  puts "Super special!"
+end
+
+</pre>
+</div>
+<h4 id="rakefile">9.10 <code>rakefile</code>
+</h4><p><code>lib/tasks</code> 경로에 Rake 파일을 생성합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Creates a Rake file in the <code>lib/tasks</code> directory of the application.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+rakefile "test.rake", "hello there"
+
+</pre>
+</div>
+<p>이 메소드는 또한 블록 코드를 받을 수도 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This method also takes a block:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+rakefile "test.rake" do
+  %Q{
+    task rock: :environment do
+      puts "Rockin'"
+    end
+  }
+end
+
+</pre>
+</div>
+<h4 id="initializer">9.11 <code>initializer</code>
+</h4><p><code>config/initializer</code> 경로에 initializer를 생성합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Creates an initializer in the <code>config/initializers</code> directory of the application:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+initializer "begin.rb", "puts 'this is the beginning'"
+
+</pre>
+</div>
+<p>이 메소드는 또한 블록 코드를 받을 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This method also takes a block, expected to return a string:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+initializer "begin.rb" do
+  "puts 'this is the beginning'"
+end
+
+</pre>
+</div>
+<h4 id="generate">9.12 <code>generate</code>
+</h4><p>특정 제너레이터를 실행합니다, 첫번째 인자는 제너레이터의 이름이고 나머지는 제너레이터에 직접 넘겨집니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Runs the specified generator where the first argument is the generator name and the remaining arguments are passed directly to the generator.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+generate "scaffold", "forums title:string description:text"
+
+</pre>
+</div>
+<h4 id="rake">9.13 <code>rake</code>
+</h4><p>특정 Rake task를 실행합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Runs the specified Rake task.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+rake "db:migrate"
+
+</pre>
+</div>
+<p>이용가능한 옵션들: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Available options are:</p>
+<ul>
+<li>
+<code>:env</code> - rake task를 실행할 환경을 명시합니다. [[[Specifies the environment in which to run this rake task.]]]</li>
+<li>
+<code>:sudo</code> - <code>sudo</code>를 사용하여 실행할지 말지를 결정합니다, 기본값은 false. [[[Whether or not to run this task using <code>sudo</code>. Defaults to <code>false</code>.]]]</li>
+</ul>
+<h4 id="capify-bang">9.14 <code>capify!</code>
+</h4><p>Capistrano로부터 capify command를 실행합니다 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Runs the <code>capify</code> command from Capistrano at the root of the application which generates Capistrano configuration.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+capify!
+
+</pre>
+</div>
+<h4 id="route">9.15 <code>route</code>
+</h4><p><code>config/routes.rb</code> 파일에 텍스트를 추가합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Adds text to the <code>config/routes.rb</code> file:</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+route "resources :people"
+
+</pre>
+</div>
+<h4 id="readme">9.16 <code>readme</code>
+</h4><p>템플릿의 source_path 안의 파일의 내용을 출력합니다, 보통은 README 파일. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Output the contents of a file in the template's <code>source_path</code>, usually a README.</p><div class="code_container">
+<pre class="brush: ruby; gutter: false; toolbar: false">
+readme "README"
+
+</pre>
+</div>
+
+
+        <h3>피드백</h3>
+        <p>
+          이 가이드의 질을 향상시키기 위한 도움을 기다리고 있습니다.
+        </p>
+        <p>
+          수정이 필요한 오타나 에러를 발견하면 <a href="https://github.com/lifo/docrails">docrails</a>을 클론한 후 직접 변경내용을 push하시기 바랍니다. 레일스의 해당 브랜치는 누구나가 write 권한이 있습니다. 커밋한 내용에 대해서는 검토작업이 이루어질 것이지만 변경내용을 서밋한 이후에 진행됩니다. <a href="https://github.com/lifo/docrails">docrails</a>은 정기적으로 master 브랜치와 클로스 머지됩니다. 
+        </p>
+        <p>
+          미완성된 내용이나 업데이트되지 않은 내용이 있을 수 있습니다. 누락된 문서를 추가해 주시기 바랍니다. 문서작성시 참고해야할 스타일과 규칙은 <a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a>를 확인하시기 바랍니다. 
+        </p>
+        <p>
+          어떤 이유에서든지, 수정이 필요한 부분을 직접 변경할 수 없는 경우에는 <a href="https://github.com/rails/rails/issues">open an issue</a>로 접속하여 문제점을 제출해 주시기 바랍니다. 
+        </p>
+        <p>
+          마지막으로, 루비온레일스 문서화에 관련된 논의가 필요한 사항은 <a href="http://groups.google.com/group/rubyonrails-docs">rubyonrails-docs mailing list</a>에서 해 주시기 바랍니다. 
+        </p>
+        <h3>문서생성일</h3>
+        <p>최종 생성일 : 2015-01-26 09:09:20 +0900 </p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>이 작업은 <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License 특허권을 가지고 있습니다.</p>
+<p>"Rails", "Ruby on Rails", 그리고 레일스 로고는 David Heinemeier Hansson의 등록상표이며, 저작권 보호를 받고 있습니다.</p>
+
+
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/responsive-tables.js"></script>
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+    $(guidesIndex.bind);
+  </script>
+</body>
+</html>

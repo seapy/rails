@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>개발 의존성 설치하기(Development Dependencies Install) {원문·전체} — Ruby on Rails Guides</title>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shCore.css" />
+<link rel="stylesheet" type="text/css" href="stylesheets/syntaxhighlighter/shThemeRailsGuides.css" />
+
+<link rel="stylesheet" type="text/css" href="stylesheets/fixes.css" />
+
+<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body class="guide">
+  <div>
+    <img src="images/edge_badge.png" alt="edge-badge" id="edge-badge" />
+  </div>
+  <div id="topNav">
+    <div class="wrapper">
+      <strong class="more-info-label">More at <a href="http://rubyonrails.org/">rubyonrails.org:</a> </strong>
+      <span class="red-button more-info-button">
+        More Ruby on Rails
+      </span>
+      <ul class="more-info-links s-hidden">
+        <li class="more-info"><a href="http://rubyonrails.org/">개요</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/download">다운로드</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/deploy">배포</a></li>
+        <li class="more-info"><a href="https://github.com/rails/rails">코드</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/screencasts">스크린캐스트</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/documentation">도큐먼트</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/ecosystem">생태계</a></li>
+        <li class="more-info"><a href="http://rubyonrails.org/community">커뮤니티</a></li>
+        <li class="more-info"><a href="http://weblog.rubyonrails.org/">블로그</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="header">
+    <div class="wrapper clearfix">
+      <h1><a href="index.html" title="Return to home page">Guides.rubyonrails.org</a></h1>
+      <ul class="nav">
+        <li><a class="nav-item" href="index.html">홈</a></li>
+        <li class="guides-index guides-index-large">
+          <a href="index.html" onclick="guideMenu(); return false;" id="guidesMenu" class="guides-index-item nav-item">가이드 인덱스</a>
+          <div id="guides" class="clearfix" style="display: none;">
+            <hr />
+              <dl class="L">
+                <dt>Start Here</dt>
+                <dd><a href="getting_started.html">Getting Started with Rails</a></dd>
+                <dt>Models</dt>
+                <dd><a href="active_record_basics.html">Active Record Basics</a></dd>
+                <dd><a href="active_record_migrations.html">Active Record Migrations</a></dd>
+                <dd><a href="active_record_validations.html">Active Record Validations</a></dd>
+                <dd><a href="active_record_callbacks.html">Active Record Callbacks</a></dd>
+                <dd><a href="association_basics.html">Active Record Associations</a></dd>
+                <dd><a href="active_record_querying.html">Active Record Query Interface</a></dd>
+                <dt>Views</dt>
+                <dd><a href="layouts_and_rendering.html">Layouts and Rendering in Rails</a></dd>
+                <dd><a href="form_helpers.html">Action View Form Helpers</a></dd>
+                <dt>Controllers</dt>
+                <dd><a href="action_controller_overview.html">Action Controller Overview</a></dd>
+                <dd><a href="routing.html">Rails Routing from the Outside In</a></dd>
+              </dl>
+              <dl class="R">
+                <dt>Digging Deeper</dt>
+                <dd><a href="active_support_core_extensions.html">Active Support Core Extensions</a></dd>
+                <dd><a href="i18n.html">Rails Internationalization API</a></dd>
+                <dd><a href="action_mailer_basics.html">Action Mailer Basics</a></dd>
+                <dd><a href="active_job_basics.html">Active Job Basics</a></dd>
+                <dd><a href="security.html">Securing Rails Applications</a></dd>
+                <dd><a href="debugging_rails_applications.html">Debugging Rails Applications</a></dd>
+                <dd><a href="configuring.html">Configuring Rails Applications</a></dd>
+                <dd><a href="command_line.html">Rails Command Line Tools and Rake Tasks</a></dd>
+                <dd><a href="asset_pipeline.html">Asset Pipeline</a></dd>
+                <dd><a href="working_with_javascript_in_rails.html">Working with JavaScript in Rails</a></dd>
+                <dd><a href="autoloading_and_reloading_constants.html">Autoloading and Reloading Constants</a></dd>
+                <dt>Extending Rails</dt>
+                <dd><a href="rails_on_rack.html">Rails on Rack</a></dd>
+                <dd><a href="generators.html">Creating and Customizing Rails Generators</a></dd>
+                <dt>Contributing to Ruby on Rails</dt>
+                <dd><a href="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</a></dd>
+                <dd><a href="api_documentation_guidelines.html">API Documentation Guidelines</a></dd>
+                <dd><a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a></dd>
+                <dt>Maintenance Policy</dt>
+                <dd><a href="maintenance_policy.html">Maintenance Policy</a></dd>
+                <dt>Release Notes</dt>
+                <dd><a href="upgrading_ruby_on_rails.html">Upgrading Ruby on Rails</a></dd>
+                <dd><a href="4_2_release_notes.html">Ruby on Rails 4.2 Release Notes</a></dd>
+                <dd><a href="4_1_release_notes.html">Ruby on Rails 4.1 Release Notes</a></dd>
+                <dd><a href="4_0_release_notes.html">Ruby on Rails 4.0 Release Notes</a></dd>
+                <dd><a href="3_2_release_notes.html">Ruby on Rails 3.2 Release Notes</a></dd>
+                <dd><a href="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</a></dd>
+                <dd><a href="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</a></dd>
+                <dd><a href="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</a></dd>
+                <dd><a href="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</a></dd>
+              </dl>
+          </div>
+        </li>
+        <li><a class="nav-item" href="contributing_to_ruby_on_rails.html">기여하기</a></li>
+        <li><a class="nav-item" href="credits.html">크레딧</a></li>
+        <li class="guides-index guides-index-small">
+          <select class="guides-index-item nav-item">
+            <option value="index.html">가이드 인덱스</option>
+              <optgroup label="Start Here">
+                  <option value="getting_started.html">Getting Started with Rails</option>
+              </optgroup>
+              <optgroup label="Models">
+                  <option value="active_record_basics.html">Active Record Basics</option>
+                  <option value="active_record_migrations.html">Active Record Migrations</option>
+                  <option value="active_record_validations.html">Active Record Validations</option>
+                  <option value="active_record_callbacks.html">Active Record Callbacks</option>
+                  <option value="association_basics.html">Active Record Associations</option>
+                  <option value="active_record_querying.html">Active Record Query Interface</option>
+              </optgroup>
+              <optgroup label="Views">
+                  <option value="layouts_and_rendering.html">Layouts and Rendering in Rails</option>
+                  <option value="form_helpers.html">Action View Form Helpers</option>
+              </optgroup>
+              <optgroup label="Controllers">
+                  <option value="action_controller_overview.html">Action Controller Overview</option>
+                  <option value="routing.html">Rails Routing from the Outside In</option>
+              </optgroup>
+              <optgroup label="Digging Deeper">
+                  <option value="active_support_core_extensions.html">Active Support Core Extensions</option>
+                  <option value="i18n.html">Rails Internationalization API</option>
+                  <option value="action_mailer_basics.html">Action Mailer Basics</option>
+                  <option value="active_job_basics.html">Active Job Basics</option>
+                  <option value="security.html">Securing Rails Applications</option>
+                  <option value="debugging_rails_applications.html">Debugging Rails Applications</option>
+                  <option value="configuring.html">Configuring Rails Applications</option>
+                  <option value="command_line.html">Rails Command Line Tools and Rake Tasks</option>
+                  <option value="asset_pipeline.html">Asset Pipeline</option>
+                  <option value="working_with_javascript_in_rails.html">Working with JavaScript in Rails</option>
+                  <option value="autoloading_and_reloading_constants.html">Autoloading and Reloading Constants</option>
+              </optgroup>
+              <optgroup label="Extending Rails">
+                  <option value="rails_on_rack.html">Rails on Rack</option>
+                  <option value="generators.html">Creating and Customizing Rails Generators</option>
+              </optgroup>
+              <optgroup label="Contributing to Ruby on Rails">
+                  <option value="contributing_to_ruby_on_rails.html">Contributing to Ruby on Rails</option>
+                  <option value="api_documentation_guidelines.html">API Documentation Guidelines</option>
+                  <option value="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</option>
+              </optgroup>
+              <optgroup label="Maintenance Policy">
+                  <option value="maintenance_policy.html">Maintenance Policy</option>
+              </optgroup>
+              <optgroup label="Release Notes">
+                  <option value="upgrading_ruby_on_rails.html">Upgrading Ruby on Rails</option>
+                  <option value="4_2_release_notes.html">Ruby on Rails 4.2 Release Notes</option>
+                  <option value="4_1_release_notes.html">Ruby on Rails 4.1 Release Notes</option>
+                  <option value="4_0_release_notes.html">Ruby on Rails 4.0 Release Notes</option>
+                  <option value="3_2_release_notes.html">Ruby on Rails 3.2 Release Notes</option>
+                  <option value="3_1_release_notes.html">Ruby on Rails 3.1 Release Notes</option>
+                  <option value="3_0_release_notes.html">Ruby on Rails 3.0 Release Notes</option>
+                  <option value="2_3_release_notes.html">Ruby on Rails 2.3 Release Notes</option>
+                  <option value="2_2_release_notes.html">Ruby on Rails 2.2 Release Notes</option>
+              </optgroup>
+          </select>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </div>
+  <hr class="hide" />
+
+  <div id="feature">
+    <div class="wrapper">
+      <h2>개발 의존성 설치하기<span class="original-text-h">(Development Dependencies Install)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></h2><p>본 가이드는 루비 온 레일스 코어 개발을 위한 환경을 설정하는 방법을 다룹니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This guide covers how to setup an environment for Ruby on Rails core development.</p><p>본 가이드를 읽은 후, 다음을 알게 됩니다.: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href='#' class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">After reading this guide, you will know:</p>
+
+                <div id="subCol">
+            <h3 class="chapter"><img src="images/chapters_icon.gif" alt="" />Chapters</h3>
+            <ol class="chapters">
+<li><a href="#%EC%89%AC%EC%9A%B4-%EB%B0%A9%EB%B2%95-the-easy-way-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">쉬운 방법<span class="original-text-h">(The Easy Way)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li>
+<a href="#%EC%96%B4%EB%A0%A4%EC%9A%B4-%EB%B0%A9%EB%B2%95-the-hard-way-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">어려운 방법<span class="original-text-h">(The Hard Way)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a>
+
+<ul>
+<li><a href="#git-%EC%84%A4%EC%B9%98-install-git-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">Git 설치<span class="original-text-h">(Install Git)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EB%A3%A8%EB%B9%84-%EC%98%A8-%EB%A0%88%EC%9D%BC%EC%8A%A4-%EC%A0%80%EC%9E%A5%EC%86%8C-%EB%B3%B5%EC%A0%9C-clone-the-ruby-on-rails-repository-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">루비 온 레일스 저장소 복제<span class="original-text-h">(Clone the Ruby on Rails Repository)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EC%84%A4%EC%A0%95-%EB%B0%8F-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%8B%A4%ED%96%89-set-up-and-run-the-tests-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">설정 및 테스트 실행<span class="original-text-h">(Set up and Run the Tests)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+<li><a href="#%EC%95%A1%ED%8B%B0%EB%B8%8C-%EB%A0%88%EC%BD%94%EB%93%9C-%EC%84%A4%EC%A0%95-active-record-setup-%EC%9B%90%EB%AC%B8%C2%B7%EC%A0%84%EC%B2%B4">액티브 레코드 설정<span class="original-text-h">(Active Record Setup)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup></a></li>
+</ul>
+</li>
+</ol>
+
+          </div>
+
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="wrapper">
+      <div id="mainCol">
+        <h3 id="쉬운-방법-the-easy-way-원문·전체">1 쉬운 방법<span class="original-text-h">(The Easy Way)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h3><p>개발 환경을 준비하기 위한 가장 손쉽고 추천되는 방법은 <a href="https://github.com/rails/rails-dev-box">Rails development box</a>를 사용하는 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The easiest and recommended way to get a development environment ready to hack is to use the <a href="https://github.com/rails/rails-dev-box">Rails development box</a>.</p><h3 id="어려운-방법-the-hard-way-원문·전체">2 어려운 방법<span class="original-text-h">(The Hard Way)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h3><p>위에서 본 것과 같이 레일스 개발 박스를 사용할 수 없디면, 루비 온 레일스 코어 개발을 위한 개발 박스를 수동으로 구축하는 단계가 다음에 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In case you can't use the Rails development box, see section above, these are the steps to manually build a development box for Ruby on Rails core development.</p><h4 id="git-설치-install-git-원문·전체">2.1 Git 설치<span class="original-text-h">(Install Git)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>루비 온 레일스는 소스코드 제어를 위해 Git을 사용합니다. <a href="http://git-scm.com/">Git homepage</a>에 설치 지침이 있습니다. Git에 익숙해지는 것을 도울 다양한 리소스들이 네트워크상에 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Ruby on Rails uses Git for source code control. The <a href="http://git-scm.com/">Git homepage</a> has installation instructions. There are a variety of resources on the net that will help you get familiar with Git:</p>
+<ul>
+<li>
+<p><a href="http://try.github.io/">Try Git course</a>는 기초를 가르쳐주는 인터렉티브 코스입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text"><a href="http://try.github.io/">Try Git course</a> is an interactive course that will teach you the basics.</p>
+</li>
+<li>
+<p><a href="http://git-scm.com/documentation">official Documentation</a>는 매우 포괄적이고 또한 Git의 기초에 대한 약간의 동영상을 포함하고 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">The <a href="http://git-scm.com/documentation">official Documentation</a> is pretty comprehensive and also contains some videos with the basics of Git</p>
+</li>
+<li>
+<p><a href="http://schacon.github.io/git/everyday.html">Everyday Git</a>은 Git을 사용할 때 충분한 내용을 가르쳐줄 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text"><a href="http://schacon.github.io/git/everyday.html">Everyday Git</a> will teach you just enough about Git to get by.</p>
+</li>
+<li>
+<p>Git의 <a href="https://peepcode.com/products/git">PeepCode screencast</a> ($12)는 따라하기 쉽습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">The <a href="https://peepcode.com/products/git">PeepCode screencast</a> on Git ($12) is easier to follow.</p>
+</li>
+<li>
+<p><a href="http://help.github.com">GitHub</a>는 Git 리소스의 다양한 링크를 제공합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text"><a href="http://help.github.com">GitHub</a> offers links to a variety of Git resources.</p>
+</li>
+<li>
+<p><a href="http://git-scm.com/book">Pro Git</a>은 크리에이티브 커먼스 라이센스로 제공되는 Git에 대한 온전한 책입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text"><a href="http://git-scm.com/book">Pro Git</a> is an entire book about Git with a Creative Commons license.</p>
+</li>
+</ul>
+<h4 id="루비-온-레일스-저장소-복제-clone-the-ruby-on-rails-repository-원문·전체">2.2 루비 온 레일스 저장소 복제<span class="original-text-h">(Clone the Ruby on Rails Repository)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>루비 온 레일스 소스 코드를 위치시키고자 하는 폴더로 이동하여(이 작업은 <code>rails</code> 서브디렉터리를 만듭니다) 다음을 실행합니다.: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Navigate to the folder where you want the Ruby on Rails source code (it will create its own <code>rails</code> subdirectory) and run:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ git clone git://github.com/rails/rails.git
+$ cd rails
+
+</pre>
+</div>
+<h4 id="설정-및-테스트-실행-set-up-and-run-the-tests-원문·전체">2.3 설정 및 테스트 실행<span class="original-text-h">(Set up and Run the Tests)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>테스트 스위트는 모든 서브밋된 코드를 통과해야 합니다. 새로운 패치를 작성하였건, 다른 사람의 것을 평가하건 상관없이, 테스트를 수행할 수 있어야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The test suite must pass with any submitted code. No matter whether you are writing a new patch, or evaluating someone else's, you need to be able to run the tests.</p><p>먼저 Nokogiri에 대한 libxml2와 libxslt를 개발용 파일과 함께 설치합니다. 우분투의 경우는 <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Install first libxml2 and libxslt together with their development files for Nokogiri. In Ubuntu that's</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ sudo apt-get install libxml2 libxml2-dev libxslt1-dev
+
+</pre>
+</div>
+<p>만약 Fedora나 CentOS를 사용하고 있다면, 다음을 실행할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you are on Fedora or CentOS, you can run</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ sudo yum install libxml2 libxml2-devel libxslt libxslt-devel
+
+</pre>
+</div>
+<p>만약 이 라이브러리들을 설치하는데 문제가 있다면, 소스코드를 수동으로 컴파일하여 이 라이브러리들을 설치해야 합니다. <a href="http://nokogiri.org/tutorials/installing_nokogiri.html#red_hat__centos">Red Hat/CentOS section of the Nokogiri tutorials</a>에 있는 지침을 따라 하십시오. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you have any problems with these libraries, you should install them manually compiling the source code. Just follow the instructions at the <a href="http://nokogiri.org/tutorials/installing_nokogiri.html#red_hat__centos">Red Hat/CentOS section of the Nokogiri tutorials</a> .</p><p>또한, <code>sqlite3-ruby</code> 젬을 위한 SQLite3와 개발용 파일들을, 우분투의 경우 다음과 같이 하면 됩니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Also, SQLite3 and its development files for the <code>sqlite3-ruby</code> gem — in Ubuntu you're done with just</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ sudo apt-get install sqlite3 libsqlite3-dev
+
+</pre>
+</div>
+<p>만약 Fedora나 CentOS를 사용하고 있다면, 다음과 같이 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">And if you are on Fedora or CentOS, you're done with</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ sudo yum install sqlite3 sqlite3-devel
+
+</pre>
+</div>
+<p><a href="http://gembundler.com/">Bundler</a>의 최신 버전을 얻습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">Get a recent version of <a href="http://gembundler.com/">Bundler</a></p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ gem install bundler
+$ gem update bundler
+
+</pre>
+</div>
+<p>그리고 다음을 실행합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">and run:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ bundle install --without db
+
+</pre>
+</div>
+<p>이 명령은 MySQL과 PostgreSQL 루비 드라이버를 제외한 모든 의존성을 설치합니다. 이것은 곧 다를 것입니다. 의존성 설치를 마치면, 다음과 같이 테스트 스위트를 실행할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">This command will install all dependencies except the MySQL and PostgreSQL Ruby drivers. We will come back to these soon. With dependencies installed, you can run the test suite with:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ bundle exec rake test
+
+</pre>
+</div>
+<p>물론 Action Pack처럼, 특정 컴포넌트를 위한 테스트를 실행할 수도 있습니다. 컴포넌트의 디렉터리로 들어가서 동일한 명령을 수행합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You can also run tests for a specific component, like Action Pack, by going into its directory and executing the same command:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd actionpack
+$ bundle exec rake test
+
+</pre>
+</div>
+<p>만약 특정 디렉터리에 위치한 테스트를 실행하고자 한다면 <code>TEST_DIR</code> 환경 변수를 사용하십시오. 예를 들어, 다음 명령은 <code>railties/test/generators</code>의 테스트만 실행할 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you want to run the tests located in a specific directory use the <code>TEST_DIR</code> environment variable. For example, this will run the tests of the <code>railties/test/generators</code> directory only:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd railties
+$ TEST_DIR=generators bundle exec rake test
+
+</pre>
+</div>
+<p>개별적으로 특정 단일 테스트만 수행할 수도 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You can run any single test separately too:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd actionpack
+$ bundle exec ruby -Itest test/template/form_helper_test.rb
+
+</pre>
+</div>
+<h4 id="액티브-레코드-설정-active-record-setup-원문·전체">2.4 액티브 레코드 설정<span class="original-text-h">(Active Record Setup)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h4><p>액티브 레코드의 테스트 스위트는 네번 실행을 시도합니다. 한번은 SQLite3, 한번은 두개의 MySQL 젬들(<code>mysql</code>과 <code>mysql2</code>), 그리고 한번은 PostgreSQL에 대한 실행입니다. 이제 그들을 위한 환경을 설정하는 방법을 보겠습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The test suite of Active Record attempts to run four times: once for SQLite3, once for each of the two MySQL gems (<code>mysql</code> and <code>mysql2</code>), and once for PostgreSQL. We are going to see now how to set up the environment for them.</p><div class="warning">
+<p> 만약 액티브 레코드 코드로 작업하려면, 적어도 MySQL, PostgreSQL, 그리고 SQLite3을 위한 테스트를 통과하는지 <em>반드시</em> 확인해야 합니다. MySQL로만 테스트했을 때 문제 없었던 많은 패치를 거부한 배후에는 다양한 어댑터간의 미묘한 차이가 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">WARNING: If you're working with Active Record code, you <em>must</em> ensure that the tests pass for at least MySQL, PostgreSQL, and SQLite3. Subtle differences between the various adapters have been behind the rejection of many patches that looked OK when tested only against MySQL.</p>
+</div><h5 id="데이터베이스-구성-database-configuration-원문·전체">2.4.1 데이터베이스 구성<span class="original-text-h">(Database Configuration)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h5><p>액티브 레코드 테스트 스위트는 사용자 정의 구성 파일 <code>activerecord/test/config.yml</code>이 필요합니다. 예제는 <code>activerecord/test/config.example.yml</code> 내에 제공되는데, 이를 복사하여 자신의 환경에 맞게 사용할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">The Active Record test suite requires a custom config file: <code>activerecord/test/config.yml</code>. An example is provided in <code>activerecord/test/config.example.yml</code> which can be copied and used as needed for your environment.</p><h5 id="mysql과-postgresql-mysql-and-postgresql-원문·전체">2.4.2 MySQL과 PostgreSQL<span class="original-text-h">(MySQL and PostgreSQL)</span> <sup><a href="#" class="original-link" onclick="$(this).parent().prev().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text, .original-text-h').toggle();return false;">전체}</a></sup>
+</h5><p>MySQL과 PostgreSQL을 위한 스위트를 실행할 수 있게 하려면 이들을 위한 젬이 필요합니다. 먼저 서버를 설치하고, 클라이언트 라이브러리들을 설치하고, 개발용 파일들을 설치합니다. 우분투에서는 다음과 같이 실행합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">To be able to run the suite for MySQL and PostgreSQL we need their gems. Install first the servers, their client libraries, and their development files. In Ubuntu just run</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ sudo apt-get install mysql-server libmysqlclient15-dev
+$ sudo apt-get install postgresql postgresql-client postgresql-contrib libpq-dev
+
+</pre>
+</div>
+<p>Fedora나 CentOS에서는 다음을 실행합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">On Fedora or CentOS, just run:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ sudo yum install mysql-server mysql-devel
+$ sudo yum install postgresql-server postgresql-devel
+
+</pre>
+</div>
+<p>그 후, 다음을 실행합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">After that run:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ rm .bundle/config
+$ bundle install
+
+</pre>
+</div>
+<p>먼저 <code>.bundle/config</code>를 삭제할 필요가 있는데, 그 이유는 "db" 그룹(아니면 파일에서 수정할 수 있는)을 설치하고자 하지 않았던 파일들을 번들러가 기억하고 있기 때문입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">We need first to delete <code>.bundle/config</code> because Bundler remembers in that file that we didn't want to install the "db" group (alternatively you can edit the file).</p><p>MySQL에 대한 테스트 스위트를 실행할 수 있게 하려면 테스트 데이터베이스에 권한을 가진 <code>rails</code>라는 이름의 사용자를 생성할 필요가 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">In order to be able to run the test suite against MySQL you need to create a user named <code>rails</code> with privileges on the test databases:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ mysql -uroot -p
+
+mysql&gt; CREATE USER 'rails'@'localhost';
+mysql&gt; GRANT ALL PRIVILEGES ON activerecord_unittest.*
+       to 'rails'@'localhost';
+mysql&gt; GRANT ALL PRIVILEGES ON activerecord_unittest2.*
+       to 'rails'@'localhost';
+
+</pre>
+</div>
+<p>그리고 테스트 데이터베이스를 생성합니다.: <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">and create the test databases:</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd activerecord
+$ bundle exec rake mysql:build_databases
+
+</pre>
+</div>
+<p>PostgreSQL의 인증은 다르게 작동합니다. 예제를 위한 개발 환경을 설정하는 쉬운 방법은 개발 계정으로 실행하는 것입니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">PostgreSQL's authentication works differently. A simple way to set up the development environment for example is to run with your development account</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ sudo -u postgres createuser --superuser $USER
+
+</pre>
+</div>
+<p>그리고나서 다음과 같이 테스트 데이터베이스를 생성합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">and then create the test databases with</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd activerecord
+$ bundle exec rake postgresql:build_databases
+
+</pre>
+</div>
+<p>PostgreSQL과 MySQL 모두를 위한 데이터베이스를 만들 수도 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">It is possible to build databases for both PostgreSQL and MySQL with</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd activerecord
+$ bundle exec rake db:create
+
+</pre>
+</div>
+<p>다음과 같이 데이터베이스를 정리할 수 있습니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">You can cleanup the databases using</p><div class="code_container">
+<pre class="brush: plain; gutter: false; toolbar: false">
+$ cd activerecord
+$ bundle exec rake db:drop
+
+</pre>
+</div>
+<div class="note">
+<p> 테스트 데이터베이스를 생성하기 위해 rake 태스크를 사용하는 것은 올바른 캐릭터셋과 정렬(collation)을 보장합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">NOTE: Using the rake task to create the test databases ensures they have the correct character set and collation.</p>
+</div><div class="note">
+<p> PostgreSQL 9.1.x 혹은 그 이전 버전에서는 HStore 확장을 활성화하는 동안 다음과 같은 경고(혹은 지역화된 경고)를 볼 것입니다: "WARNING: =&gt; is deprecated as an operator" <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p>
+<p class="original-text">NOTE: You'll see the following warning (or localized warning) during activating HStore extension in PostgreSQL 9.1.x or earlier: "WARNING: =&gt; is deprecated as an operator".</p>
+</div><p>만약 다른 데이터베이스를 사용한다면, 기본 접속 정보를 위해 <code>activerecord/test/config.yml</code> 혹은 <code>activerecord/test/config.example.yml</code> 파일을 살펴 보십시오. 만약 머신에 반드시 다른 종류의 자격증명을 제공해야만 한다면, <code>activerecord/test/config.yml</code>를 수정할 수 있습니다. 하지만 그러한 변경의 어떠한 부분이라도 Rails로 푸시하지 않아야 합니다. <sup><a href="#" class="original-link" onclick="$(this).parent().parent().next().toggle();return false;">{원문</a><a href="#" class="original-link">·</a><a href="#" class="original-link" onclick="$('.original-text').toggle();return false;">전체}</a></sup></p><p class="original-text">If you’re using another database, check the file <code>activerecord/test/config.yml</code> or <code>activerecord/test/config.example.yml</code> for default connection information. You can edit <code>activerecord/test/config.yml</code> to provide different credentials on your machine if you must, but obviously you should not push any such changes back to Rails.</p>
+
+        <h3>피드백</h3>
+        <p>
+          이 가이드의 질을 향상시키기 위한 도움을 기다리고 있습니다.
+        </p>
+        <p>
+          수정이 필요한 오타나 에러를 발견하면 <a href="https://github.com/lifo/docrails">docrails</a>을 클론한 후 직접 변경내용을 push하시기 바랍니다. 레일스의 해당 브랜치는 누구나가 write 권한이 있습니다. 커밋한 내용에 대해서는 검토작업이 이루어질 것이지만 변경내용을 서밋한 이후에 진행됩니다. <a href="https://github.com/lifo/docrails">docrails</a>은 정기적으로 master 브랜치와 클로스 머지됩니다. 
+        </p>
+        <p>
+          미완성된 내용이나 업데이트되지 않은 내용이 있을 수 있습니다. 누락된 문서를 추가해 주시기 바랍니다. 문서작성시 참고해야할 스타일과 규칙은 <a href="ruby_on_rails_guides_guidelines.html">Ruby on Rails Guides Guidelines</a>를 확인하시기 바랍니다. 
+        </p>
+        <p>
+          어떤 이유에서든지, 수정이 필요한 부분을 직접 변경할 수 없는 경우에는 <a href="https://github.com/rails/rails/issues">open an issue</a>로 접속하여 문제점을 제출해 주시기 바랍니다. 
+        </p>
+        <p>
+          마지막으로, 루비온레일스 문서화에 관련된 논의가 필요한 사항은 <a href="http://groups.google.com/group/rubyonrails-docs">rubyonrails-docs mailing list</a>에서 해 주시기 바랍니다. 
+        </p>
+        <h3>문서생성일</h3>
+        <p>최종 생성일 : 2015-01-26 09:09:20 +0900 </p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hide" />
+  <div id="footer">
+    <div class="wrapper">
+      <p>이 작업은 <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0</a> License 특허권을 가지고 있습니다.</p>
+<p>"Rails", "Ruby on Rails", 그리고 레일스 로고는 David Heinemeier Hansson의 등록상표이며, 저작권 보호를 받고 있습니다.</p>
+
+
+    </div>
+  </div>
+
+  <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/responsive-tables.js"></script>
+  <script type="text/javascript" src="javascripts/guides.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shCore.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushRuby.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushXml.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushSql.js"></script>
+  <script type="text/javascript" src="javascripts/syntaxhighlighter/shBrushPlain.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.all()
+    $(guidesIndex.bind);
+  </script>
+</body>
+</html>
