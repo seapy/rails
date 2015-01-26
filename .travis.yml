@@ -4,3 +4,6 @@ cache: bundler
 rvm:
   - 2.2.0
 script: bundle exec rake guides:generate:html:ko:publish
+branches:
+  only:
+    - rorlakr_travis
