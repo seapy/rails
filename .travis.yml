@@ -3,4 +3,4 @@ language: ruby
 cache: bundler
 rvm:
   - 2.2.0
-script: "cd guides && bundle exec rake guides:generate:html:ko:publish"
+script: "bundle exec rake test"
