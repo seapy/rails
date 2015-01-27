@@ -6,5 +6,4 @@ rvm:
 script: "cd guides && bundle exec rake guides:generate:html:ko:publish"
 branches:
   only:
-    - rorlakr_travis
-    - rorlakr_travis2
+    - /^deploy-.*$/
